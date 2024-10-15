@@ -1,0 +1,42 @@
+{
+    "name": "ags-dotfiles",
+    "author": "Aylur",
+    "kofi": "https://ko-fi.com/aylur",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Aylur/dotfiles.git"
+    },
+    "devDependencies": {
+        "@girs/accountsservice-1.0": "^1.0.0-3.2.7",
+        "@typescript-eslint/eslint-plugin": "^6.20.0",
+        "eslint": "^8.57.0",
+        "eslint-config-standard-with-typescript": "^43.0.1",
+        "eslint-plugin-import": "^2.29.1",
+        "eslint-plugin-jsdoc": "^48.7.0",
+        "eslint-plugin-n": "^16.6.2",
+        "eslint-plugin-promise": "^6.1.1",
+        "typescript": "^5.5.3"
+    },
+    "dependencies": {
+        "@girs/ags-6.0": "^6.0.0-4.0.0-beta.6",
+        "@girs/gjs": "^4.0.0-beta.6",
+        "@girs/gnome-shell": "^46.0.0-beta8",
+        "@girs/gtk-3.0": "^3.24.42-4.0.0-beta.6",
+        "ags-ts": "^1.0.6",
+        "i3-ts": "https://github.com/feathers-studio/i3-ts.git"
+    },
+    "version": "1.0.0",
+    "description": "if suggestions don't work, first make sure you have TypeScript LSP working in your editor",
+    "main": "config.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Aylur/dotfiles/issues"
+    },
+    "homepage": "https://github.com/Aylur/dotfiles#readme"
+}
