@@ -1,9 +1,10 @@
 import { i3_EVENT_TYPE } from "i3-ts/enum"
 import { Workspace } from "i3-ts/message-types"
 import { Connect } from "i3-ts/mod"
-import Workspace from "widget/overview/Workspace"
 
 export class Sway extends Service {
+
+    static #instance: Sway
 
     static {
         Service.register(this, {}, {
@@ -26,10 +27,10 @@ export class Sway extends Service {
 
     private async init() {
         const ws = await this.connection.getWorkspaces()
-        ws.forEach(w => this.workspaces.addWorkspace(w))
+        ws.forEach(w => this.getWS(w)?.setOccupied(true))
         const focused = ws.find(w => w.focused)
         if (focused != null) {
-            this.workspaces.setActive(focused)
+            this.getWS(focused).setActive(true)
         }
 
         this.notify('workspaces')
@@ -40,17 +41,18 @@ export class Sway extends Service {
             e => {
                 switch (e.change) {
                     case "focus": {
-                        this.workspaces.setActive(e.current as Workspace, e.old as Workspace)
+                        this.getWS(e.old as Workspace).setActive(false)
+                        this.getWS(e.current as Workspace).setActive(true)
                         break
                     }
 
                     case "init": {
-                        this.workspaces.addWorkspace(e.current as Workspace)
+                        this.getWS(e.current as Workspace).setOccupied(true)
                         break
                     }
 
                     case "empty": {
-                        this.workspaces.removeWorkspace(e.current as Workspace)
+                        this.getWS(e.current as Workspace).setOccupied(false)
                         break
                     }
                     default: console.log(`unhandled ${e.change}`)
@@ -62,52 +64,8 @@ export class Sway extends Service {
     }
 
     static async obtain() {
-        return new Sway(await Connect()).init()
-    }
-}
-
-type OpenConnection = Awaited<ReturnType<typeof Connect>>
-
-const min_workspaces = 5
-
-export class WorkspaceService extends Service {
-    static {
-        Service.register(this, {}, {
-            'active_workroom': ['int'],
-            'workspaces_count': ['int'],
-        })
-    }
-
-    active_workroom: number = 0
-    workspaces_count: number = min_workspaces
-
-    workspaces: { [wr: string]: { [ws: string]: WS } } = {};
-
-    public getWorkspace(ws: number, wr: number = this.active_workroom): WS {
-        return this.getWsByIdx(wr, ws)
-    }
-
-    setActive(current: Workspace, old: Workspace | null = null) {
-        if (old != null) {
-            this.getWS(old).setActive(false)
-        }
-        this.getWS(current).setActive(true)
-
-        // better handle workrooms
-        const { wr } = this.extractIndices(current)
-        if (wr != this.active_workroom) {
-            this.active_workroom = wr
-            this.notify('active_workroom')
-            this.emit('changed')
-        }
-    }
-
-    addWorkspace(workspace: Workspace) {
-        this.getWS(workspace).setOccupied(true)
-    }
-
-    removeWorkspace(workspace: Workspace) {
-        this.getWS(workspace).setOccupied(false)
+        if (!Sway.#instance) Sway.#instance = await new Sway(await Connect()).init()
+        return Sway.#instance
     }
 
     private extractIndices(workspace: Workspace) {
@@ -118,15 +76,79 @@ export class WorkspaceService extends Service {
         }
     }
 
-    private getWsByIdx(wr: number, ws: number) {
-        if (!this.workspaces[wr]) this.workspaces[wr] = {}
-        if (!this.workspaces[wr][ws]) this.workspaces[wr][ws] = new WS()
-        return this.workspaces[wr][ws]
+    private getWS(workspace: Workspace) {
+        const { wr, ws } = this.extractIndices(workspace)
+        return this.workspaces.getWorkroom(wr).getWorkspace(ws)
+    }
+}
+
+type OpenConnection = Awaited<ReturnType<typeof Connect>>
+
+export class WorkspaceService extends Service {
+    static {
+        Service.register(this, {}, {
+            'active-workroom': ['int'],
+        })
     }
 
-    private getWS(workspace: Workspace) {
-        const { ws, wr } = this.extractIndices(workspace)
-        return this.getWsByIdx(wr, ws)
+    private _active_workroom: number = 0
+    get active_workroom() { return this._active_workroom }
+
+    private _workrooms: Map<number, WR> = new Map()
+
+    getWorkroom(idx: number) {
+        if (!this._workrooms.get(idx)) {
+            const wr = new WR()
+            wr.connect("notify::active", (s) => {
+                if (s.active) {
+                    this.updateProperty('active_workroom', idx)
+                }
+            })
+            this._workrooms.set(idx, wr)
+        }
+        return this._workrooms.get(idx)!!
+    }
+}
+
+class WR extends Service {
+    static {
+        Service.register(this, {}, {
+            'active_workspace': ['int'],
+            'active': ['boolean'],
+            'length': ['int']
+        })
+    }
+
+    private _length = 5
+    get length() { return this._length }
+
+    private _active_workspace = -1
+    get active_workspace() { return this._active_workspace }
+
+    private _active = false
+    get active() { return this._active }
+
+    private _workspaces: Map<number, WS> = new Map()
+
+    getWorkspace(idx: number) {
+        if (!this._workspaces.get(idx)) {
+            const ws = new WS()
+            ws.connect("notify::active", (s) => {
+                if (s.active) {
+                    this.setActive(true)
+                    this.updateProperty('active_workspace', idx)
+                } else {
+                    const stillActive = Array.from(this._workspaces.values()).some(w => w.active)
+                    this.setActive(stillActive)
+                }
+            })
+            this._workspaces.set(idx, ws)
+        }
+        return this._workspaces.get(idx)!!
+    }
+
+    setActive(active: boolean) {
+        this.updateProperty('active', active)
     }
 }
 
@@ -139,6 +161,8 @@ class WS extends Service {
         })
     }
 
+    id = Math.random() * 1000
+
     private _active: boolean = false
     private _occupied: boolean = false
     get active() { return this._active }
@@ -147,14 +171,11 @@ class WS extends Service {
     get ws() { return this }
 
     setActive(active: boolean) {
-        this._active = active
-        this.notify('active')
+        this.updateProperty('active', active)
     }
 
     setOccupied(occupied: boolean) {
-        console.log("occupied:", occupied)
-        this._occupied = occupied
-        this.notify('occupied')
+        this.updateProperty('occupied', occupied)
     }
 
     override notify(property_name: string): void {
