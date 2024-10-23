@@ -25,6 +25,7 @@ $button-radius: $radius;
     transition: $transition;
     background-color: $bg;
 
+
     .panel-button {
         @include panel-button;
 
@@ -49,12 +50,23 @@ $button-radius: $radius;
         }
     }
 
+    .windowtitle {
+        label {
+            font-size: 10pt;
+
+            &.appname {
+                color: #665c54;
+                margin-right: 4px;
+            }
+        }
+    }
+
     .workspaces {
         label {
             font-size: 0;
             min-width: 5pt;
             min-height: 5pt;
-            border-radius: $radius*.6;
+            border-radius: $radius * .6;
             box-shadow: inset 0 0 0 $border-width $border-color;
             margin: 0 $padding * .5;
             transition: $transition* .5;
@@ -69,8 +81,12 @@ $button-radius: $radius;
             &.active {
                 // background-color: $primary-bg;
                 background-image: $active-gradient;
-                min-width: 20pt;
+                min-width: 15pt;
                 min-height: 12pt;
+            }
+
+            &.urgent {
+                background-color: $error-bg;
             }
         }
 
@@ -120,6 +136,7 @@ $button-radius: $radius;
     .quicksettings>box>box {
         @include spacing($spacing: if($bar-spacing==0, $padding / 2, $bar-spacing));
     }
+
 
     .quicksettings:not(.active):not(:active) {
         .bluetooth {

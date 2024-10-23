@@ -1,15 +1,14 @@
 import BatteryBar from "./buttons/BatteryBar"
 import ColorPicker from "./buttons/ColorPicker"
 import Date from "./buttons/Date"
-import Launcher from "./buttons/Launcher"
 import Media from "./buttons/Media"
 import PowerMenu from "./buttons/PowerMenu"
 import SysTray from "./buttons/SysTray"
 import SystemIndicators from "./buttons/SystemIndicators"
-import Taskbar from "./buttons/Taskbar"
 import Workspaces from "./buttons/Workspaces"
 import ScreenRecord from "./buttons/ScreenRecord"
 import Messages from "./buttons/Messages"
+import WindowTitle from "./WindowTitle"
 import options from "options"
 
 const { start, center, end } = options.bar.layout
@@ -21,12 +20,12 @@ const widget = {
     battery: BatteryBar,
     colorpicker: ColorPicker,
     date: Date,
-    launcher: Launcher,
     media: Media,
     powermenu: PowerMenu,
     systray: SysTray,
     system: SystemIndicators,
     // taskbar: Taskbar,
+    windowtitle: WindowTitle,
     workspaces: Workspaces,
     screenrecord: ScreenRecord,
     messages: Messages,

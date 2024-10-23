@@ -1,11 +1,11 @@
 import PanelButton from "../PanelButton"
 import { sh, range } from "lib/utils"
-import { Sway } from "lib/sway"
+import { HyprWS } from "lib/sway"
 
-const sway = await Sway.obtain()
+const ws = new HyprWS()
 
 const Workspaces = (wr: number) => {
-    const workroom = sway.workspaces.getWorkroom(wr)
+    const workroom = ws.workspaces.getWorkroom(wr)
     return Widget.Box({
         children: range(workroom.length).map(ws => {
             const workspace = workroom.getWorkspace(ws)
@@ -14,14 +14,15 @@ const Workspaces = (wr: number) => {
                 vpack: "center",
                 // todo label
                 label: `${ws}`,
-                className: workspace.bind('ws')
+                className: workspace.bind("ws")
                     .as(ws => {
                         const active = ws.active ? "active" : ""
                         const occupied = ws.occupied ? "occupied" : ""
-                        return `${active} ${occupied}`
+                        const urgent = ws.urgent ? "urgent" : ""
+                        return `${active} ${occupied} ${urgent}`
                     }),
             })
-        })
+        }),
     })
 }
 export default () => PanelButton({
@@ -30,5 +31,5 @@ export default () => PanelButton({
     // on_scroll_up: () => dispatch("m+1"),
     // on_scroll_down: () => dispatch("m-1"),
     // on_clicked: () => App.toggleWindow("overview"),
-    child: sway.workspaces.bind('active_workroom').as(Workspaces),
+    child: ws.workspaces.bind("active_workroom").as(Workspaces),
 })

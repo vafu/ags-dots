@@ -7,8 +7,9 @@ import options from "options"
 const TARGET = [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)]
 const scale = (size: number) => (options.overview.scale.value / 100) * size
 const sway = await Sway.obtain()
+const hyprland = await Service.import("hyprland")
 
-// const dispatch = (args: string) => hyprland.messageAsync(`dispatch ${args}`)
+const dispatch = (args: string) => hyprland.messageAsync(`dispatch ${args}`)
 
 const size = (id: number) => {
     const def = { h: 1080, w: 1920 }

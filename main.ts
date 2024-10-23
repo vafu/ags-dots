@@ -9,9 +9,9 @@ import { setupDateMenu } from "widget/datemenu/DateMenu"
 import NotificationPopups from "widget/notifications/NotificationPopups"
 import ScreenCorners from "widget/bar/ScreenCorners"
 import OSD from "widget/osd/OSD"
-import Overview from "widget/overview/Overview"
 import Verification from "widget/powermenu/Verification"
 import PowerMenu from "widget/powermenu/PowerMenu"
+import SettingsDialog from "widget/settings/SettingsDialog"
 
 
 App.config({
@@ -32,7 +32,7 @@ App.config({
         ...forMonitors(ScreenCorners),
         ...forMonitors(OSD),
         PowerMenu(),
-        //        SettingsDialog(),
+        SettingsDialog(),
         Verification(),
     ],
 })

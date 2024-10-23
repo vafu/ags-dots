@@ -2,13 +2,11 @@ import { type Binding } from "lib/utils"
 import PopupWindow, { Padding } from "widget/PopupWindow"
 import icons from "lib/icons"
 import options from "options"
-import nix from "service/nix"
 import * as AppLauncher from "./AppLauncher"
 import * as NixRun from "./NixRun"
 import * as ShRun from "./ShRun"
 
 const { width, margin } = options.launcher
-const isnix = nix.available
 
 function Launcher() {
     const favs = AppLauncher.Favorites()

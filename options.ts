@@ -5,26 +5,20 @@ import icons from "lib/icons"
 
 const options = mkOptions(OPTIONS, {
     autotheme: opt(false),
-
-    wallpaper: {
-        resolution: opt<import("service/wallpaper").Resolution>(1920),
-        market: opt<import("service/wallpaper").Market>("random"),
-    },
-
     theme: {
         dark: {
             primary: {
-                bg: opt("#51a4e7"),
-                fg: opt("#141414"),
+                bg: opt("#282828"),
+                fg: opt("#ebdbb2"),
             },
             error: {
-                bg: opt("#e55f86"),
-                fg: opt("#141414"),
+                bg: opt("#cc241d"),
+                fg: opt("#fb4934"),
             },
-            bg: opt("#171717"),
-            fg: opt("#eeeeee"),
-            widget: opt("#eeeeee"),
-            border: opt("#eeeeee"),
+            bg: opt("#282828"),
+            fg: opt("#ebdbb2"),
+            widget: opt("#504945"),
+            border: opt("#5a524c"),
         },
         light: {
             primary: {
@@ -51,11 +45,11 @@ const options = mkOptions(OPTIONS, {
 
         shadows: opt(true),
         padding: opt(7),
-        spacing: opt(12),
-        radius: opt(11),
+        spacing: opt(10),
+        radius: opt(15),
     },
 
-    transition: opt(200),
+    transition: opt(300),
 
     font: {
         size: opt(13),
@@ -65,26 +59,25 @@ const options = mkOptions(OPTIONS, {
     bar: {
         flatButtons: opt(true),
         position: opt<"top" | "bottom">("top"),
-        corners: opt(50),
+        corners: opt(0),
         transparent: opt(false),
         layout: {
             start: opt<Array<import("widget/bar/Bar").BarWidget>>([
                 "workspaces",
-                "expander",
+                // "expander",
                 "messages",
             ]),
             center: opt<Array<import("widget/bar/Bar").BarWidget>>([
-                "date",
+                "windowtitle",
             ]),
             end: opt<Array<import("widget/bar/Bar").BarWidget>>([
                 "media",
                 "expander",
                 "systray",
                 "screenrecord",
-                // "colorpicker",
                 "system",
                 "battery",
-                "powermenu",
+                "date",
             ]),
         },
         launcher: {
@@ -99,7 +92,7 @@ const options = mkOptions(OPTIONS, {
             action: opt(() => App.toggleWindow("launcher")),
         },
         date: {
-            format: opt("%H:%M - %A %e."),
+            format: opt("%H:%M"),
             action: opt(() => App.toggleWindow("datemenu")),
         },
         battery: {

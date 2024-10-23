@@ -1,11 +1,11 @@
-import options from "options";
-import { Sway } from "./sway";
+import options from "options"
+import { HyprWS } from "./sway"
 
-const colors = ["#fabc2b", "#abf2c1", "#dda2bf"]
+const colors = ["#83a598", "#b8bb26", "#fe8019", "#8ec07c"]
+const wrservice = new HyprWS()
 
 export default async function init() {
-    const sway = await Sway.obtain()
-    sway.workspaces.connect('notify::active-workroom', (w) => {
-        options.theme.dark.primary.bg.value = colors[w.active_workroom - 1]
+    wrservice.workspaces.connect("notify::active-workroom", w => {
+        options.theme.dark.primary.bg.value = colors[w.active_workroom]
     })
 }

@@ -71,7 +71,7 @@ const Regular = () => Widget.Box({
     children: [
         Indicator(),
         PercentLabel(),
-        LevelBar(),
+        // LevelBar(),
     ],
 })
 
