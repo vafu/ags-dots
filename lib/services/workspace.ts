@@ -75,8 +75,6 @@ class WS extends Service {
         })
     }
 
-    id = Math.random() * 1000
-
     private _active: boolean = false
     private _occupied: boolean = false
     private _urgent: boolean = false
@@ -103,3 +101,6 @@ class WS extends Service {
         super.notify("ws")
     }
 }
+
+const ws = new WorkspaceService
+export default ws

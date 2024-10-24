@@ -1,11 +1,11 @@
+import { obtainService } from "lib/services"
 import PanelButton from "../PanelButton"
 import { sh, range } from "lib/utils"
-import { HyprWS } from "lib/sway"
 
-const ws = new HyprWS()
+const ws = await obtainService("workspace")
 
 const Workspaces = (wr: number) => {
-    const workroom = ws.workspaces.getWorkroom(wr)
+    const workroom = ws.getWorkroom(wr)
     return Widget.Box({
         children: range(workroom.length).map(ws => {
             const workspace = workroom.getWorkspace(ws)
@@ -31,5 +31,5 @@ export default () => PanelButton({
     // on_scroll_up: () => dispatch("m+1"),
     // on_scroll_down: () => dispatch("m-1"),
     // on_clicked: () => App.toggleWindow("overview"),
-    child: ws.workspaces.bind("active_workroom").as(Workspaces),
+    child: ws.bind("active_workroom").as(Workspaces),
 })
