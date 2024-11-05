@@ -67,11 +67,12 @@ const BluetoothIndicator = () => Widget.Overlay({
     }),
 })
 
-const NetworkIndicator = () => Widget.Icon().hook(network, self => {
-    const icon = network[network.primary || "wifi"]?.icon_name
-    self.icon = icon || ""
-    self.visible = !!icon
-})
+const NetworkIndicator = () => Widget.Icon()
+    .hook(network, self => {
+        const icon = network[network.primary || "wifi"]?.icon_name
+        self.icon = icon || ""
+        self.visible = !!icon
+    })
 
 const AudioIndicator = () => Widget.Icon()
     .hook(audio.speaker, self => {
