@@ -13,11 +13,13 @@ import Verification from "widget/powermenu/Verification"
 import PowerMenu from "widget/powermenu/PowerMenu"
 import SettingsDialog from "widget/settings/SettingsDialog"
 import Sideleft from "widget/sideleft/main"
+import { setupHyprland } from "lib/hyprland"
 
 
 App.config({
     onConfigParsed: () => {
         setupQuickSettings()
+        setupHyprland()
         setupDateMenu()
         init()
     },
