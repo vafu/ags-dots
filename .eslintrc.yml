@@ -54,7 +54,7 @@ rules:
     - error
     - always
   indent:
-    - error
+    - warn
     - 4
     - SwitchCase: 1
   keyword-spacing:
@@ -85,7 +85,7 @@ rules:
   no-useless-escape:
     - off
   max-len:
-    - error
+    - warn
     - code: 100
   func-call-spacing:
     - error

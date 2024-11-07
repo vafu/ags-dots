@@ -1,0 +1,1931 @@
+$sidebar_chat_textboxareaColor: mix($onSurfaceVariant, $surfaceVariant, 40%);
+$rootTransparency: 0.22; // Transparency = 1 - opacity
+$transparency: 0.75;
+
+// Transparent versions
+@if $transparent == True {
+  $background: transparentize($background, $rootTransparency);
+  $surface: transparentize($surface, $transparency);
+  $surfaceDim: transparentize($surfaceDim, $transparency);
+  $surfaceBright: transparentize($surfaceBright, $transparency);
+  $surfaceContainerLowest: transparentize($surfaceContainerLowest, $transparency);
+  $surfaceContainerLow: transparentize($surfaceContainerLow, $transparency);
+  $surfaceContainer: transparentize($surfaceContainer, $transparency);
+  $surfaceContainerHigh: transparentize($surfaceContainerHigh, $transparency);
+  $surfaceContainerHighest: transparentize($surfaceContainerHighest, $transparency);
+  $surfaceVariant: transparentize($surfaceVariant, $transparency);
+  $inverseSurface: transparentize($inverseSurface, $transparency);
+  $surfaceTint: transparentize($surfaceTint, $transparency);
+}
+
+// Others
+$subtext: $outline;
+$actiontext: mix($onBackground, $background, 85%);
+$black: black;
+$white: white;
+
+/// Color mappings for more chaotic, dynamic colors like the average rice ///
+// General
+$layer0: $background;
+$onLayer0: $onBackground;
+$layer0Hover: mix($layer0, $onLayer0, 85%);
+$layer0Active: $surfaceContainerHigh;
+$onLayer0Active: $onSurface;
+$onLayer0Inactive: mix($onLayer0, $layer0, 70%);
+$layer1: $surfaceContainerLow;
+$onLayer1: $onSurface;
+$onLayer1Inactive: mix($onLayer1, $layer1, 45%);
+$onLayer1: $onSurfaceVariant;
+$layer2: mix($surfaceContainer, $surfaceContainerHigh, 55%);
+$onLayer2: $onSurface;
+$layer3: $surfaceContainerHigh;
+$onLayer3: $onSurface;
+$layer1Hover: mix($layer1, $onLayer1, 85%);
+$layer1Active: mix($layer1, $onLayer1, 70%);
+$layer2Hover: mix($layer2, $onLayer2, 90%);
+$layer2Active: mix($layer2, $onLayer2, 80%);
+$layer3Hover: mix($layer3, $onLayer3, 90%);
+$layer3Active: mix($layer3, $onLayer3, 80%);
+// Elements
+$windowtitleOnLayer0Inactive: $onLayer0Inactive;
+$windowtitleOnLayer0: $onLayer0;
+$barspacerightOnLayer0: $onLayer0;
+$timeOnLayer1: $onLayer1;
+$dateOnLayer1: $onLayer1;
+$ramOnLayer1: $onLayer1;
+$ramLayer2: $secondaryContainer;
+$ramOnLayer2: $onSecondaryContainer;
+$swapOnLayer1: $onLayer1;
+$swapLayer2: $secondaryContainer;
+$swapOnLayer2: $onSecondaryContainer;
+$cpuOnLayer1: $onLayer1;
+$cpuLayer2: $secondaryContainer;
+$cpuOnLayer2: $onSecondaryContainer;
+$musicOnLayer1: $onLayer1;
+$musicLayer2: $secondaryContainer;
+$musicOnLayer2: $onSecondaryContainer;
+$utilsLayer2: $layer2;
+$utilsOnLayer2: $onLayer2;
+$battOnLayer1: $onLayer1;
+$battLayer2: $secondaryContainer;
+$battOnLayer2: $onSecondaryContainer;
+$workspaceOnLayer1Inactive: $onLayer1Inactive;
+$workspaceLayer3: $primary;
+$workspaceOnLayer3: $onPrimary;
+$workspaceOnLayer2: $onSecondaryContainer;
+$trayOnLayer0: $onLayer0;
+$cheatsheetTitle: $onSecondaryContainer;
+$cheatsheetColors: (
+    $onSecondaryContainer,
+    $onSecondaryContainer,
+    $onSecondaryContainer,
+    $onSecondaryContainer,
+    $onSecondaryContainer,
+    $onSecondaryContainer,
+    $onSecondaryContainer,
+    $onSecondaryContainer
+);
+
+$sessionColors: (
+    $onLayer1,
+    $onLayer1,
+    $onLayer1,
+    $onLayer1,
+    $onLayer1,
+    $onLayer1,
+    $onLayer1
+);
+$brightnessOnLayer0: $onLayer0;
+$volumeOnLayer0: $onLayer0;
+
+* {
+    selection {
+        background-color: $secondary;
+        color: $onSecondary;
+    }
+
+    caret-color: $onLayer2;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+menu {
+    @include small-rounding;
+    border: 1px solid mix($surfaceContainer, $onBackground, 80%); // I hate this
+    padding: 0.681rem;
+    background: opacify($surfaceContainer, 1);
+    color: $onSurface;
+    -gtk-outline-radius: 1.159rem;
+
+    animation-name: appear;
+    animation-duration: 40ms;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+}
+
+menubar>menuitem {
+    border-radius: 0.545rem;
+    -gtk-outline-radius: 0.545rem;
+    min-width: 13.636rem;
+    min-height: 2.727rem;
+}
+
+menu>menuitem {
+    padding: 0.4em 1.5rem;
+    background: transparent;
+    transition: 0.2s ease background-color;
+    border-radius: 0.545rem;
+    -gtk-outline-radius: 0.545rem;
+}
+
+menu>menuitem:hover,
+menu>menuitem:focus {
+    background-color: $layer2Hover;
+}
+
+menu>menuitem:active {
+    background-color: $layer2Active;
+}
+
+radio {
+    @include full-rounding;
+    margin: 0.273rem;
+    min-width: 15px;
+    min-height: 15px;
+    border: 0.068rem solid $outline;
+}
+
+// radio:first-child {
+//     background-color: red;
+// }
+
+radio:checked {
+    min-width: 8px;
+    min-height: 8px;
+    background-color: $onPrimary;
+    border: 0.477rem solid $primary;
+}
+
+tooltip {
+    animation-name: appear;
+    animation-duration: 100ms;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    @include normal-rounding;
+    background-color: opacify($color: $inverseSurface, $amount: 1);
+    color: $inverseOnSurface;
+}
+
+/////////////////////////////////////////
+// Emoji Chooser structure
+// popover
+// ├── box.emoji-searchbar
+// │   ╰── entry.search
+// ╰── box.emoji-toolbar
+//     ├── button.image-button.emoji-section
+//     ├── ...
+//     ╰── button.image-button.emoji-section
+
+popover {
+    @include elevation-border-softer;
+    padding: 0.681rem;
+    background: $surfaceContainerHigh;
+    color: $onSurface;
+    border-radius: 1.159rem;
+    -gtk-outline-radius: 1.159rem;
+
+    animation-name: appear;
+    animation-duration: 40ms;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+}
+
+
+/////////////////////////////////////////
+
+.configtoggle-box {
+    padding: 0.205rem 0.341rem;
+}
+
+.switch-bg {
+    @include element_decel;
+    @include full-rounding;
+    border: 0.136rem solid $onSurface;
+    min-width: 2.864rem;
+    min-height: 1.637rem;
+}
+
+.switch-bg-true {
+    background-color: $primary;
+    border: 0.136rem solid $primary;
+}
+
+.switch-fg {
+    @include full-rounding;
+    @include menu_decel;
+    background-color: $onSurface;
+    color: $layer1;
+    min-width: 0.819rem;
+    min-height: 0.819rem;
+    margin-left: 0.477rem;
+}
+
+.switch-fg-true {
+    background-color: $onPrimary;
+    color: $primary;
+    min-width: 1.431rem;
+    min-height: 1.431rem;
+    margin-left: 1.431rem;
+}
+
+.switch-fg-toggling-false {
+    @include menu_decel;
+    min-width: 1.636rem;
+    min-height: 0.819rem;
+}
+
+.segment-container {
+    @include full-rounding;
+    border: 0.068rem solid $outline;
+}
+
+.segment-container>*:first-child {
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+}
+
+.segment-container>* {
+    border-right: 0.068rem solid $outline;
+    padding: 0.341rem 0.682rem;
+}
+
+.segment-container>*:last-child {
+    border-right: 0rem solid transparent;
+    border-top-right-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+}
+
+.segment-btn {
+    color: $onSurface;
+}
+
+.segment-btn:focus,
+.segment-btn:hover {
+    background-color: $layer0Hover;
+}
+
+.segment-btn-enabled {
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+}
+
+.segment-btn-enabled:hover,
+.segment-btn-enabled:focus {
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+}
+
+.multipleselection-container {}
+
+.multipleselection-btn {
+    @include small-rounding;
+    padding: 0rem 0.341rem;
+    border: 0.034rem solid $outline;
+    color: $onSurface;
+}
+
+.multipleselection-btn:focus,
+.multipleselection-btn:hover {
+    background-color: $layer0Hover;
+    color: $onSurface;
+}
+
+.multipleselection-btn-enabled {
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+}
+
+.multipleselection-btn-enabled:hover,
+.multipleselection-btn-enabled:focus {
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+}
+
+.gap-v-5 {
+    min-height: 0.341rem;
+}
+
+.gap-h-5 {
+    min-width: 0.341rem;
+}
+
+.gap-v-10 {
+    min-height: 0.682rem;
+}
+
+.gap-h-10 {
+    min-width: 0.682rem;
+}
+
+.gap-v-15 {
+    min-height: 1.023rem;
+}
+
+.gap-h-15 {
+    min-width: 1.023rem;
+}
+
+.tab-btn {
+    @include small-rounding;
+    @include element_decel;
+    min-height: 2.5rem;
+    color: $onLayer0;
+}
+
+.tab-btn:hover {
+    background-color: $layer0Hover;
+}
+
+.tab-btn:focus {
+    background-color: $surfaceContainerLow;
+}
+
+.tab-btn-active>box>label {
+    color: $primary;
+}
+
+.tab-indicator {
+    transition: 180ms ease-in-out; // Doesn't look that good, but it syncs with the GtkStack
+    min-height: 0.205rem;
+    padding: 0rem 1.023rem;
+    color: $primary;
+}
+
+.tab-icon {
+    @include element_decel;
+    @include full-rounding;
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    font-size: 1.406rem;
+    color: $onSurface;
+}
+
+.tab-icon-active {
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+}
+
+.tab-icon-expandable {
+    transition: 0ms;
+    @include full-rounding;
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    font-size: 1.406rem;
+    color: $onSurface;
+    padding: 0rem;
+}
+
+.tab-icon-expandable-active {
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+    padding: 0rem 0.545rem;
+    min-width: 9.545rem;
+}
+
+widget {
+    @include small-rounding;
+}
+
+.spinbutton {
+    @include small-rounding;
+    background-color: $layer2;
+    padding: 0.341rem;
+    entry {
+        color: $onLayer2;
+        margin: 0.136rem 0.273rem;
+    }
+    button {
+        margin-left: 0.205rem;
+        padding: 0.136rem;
+    }
+}
+.test {
+    background-image: linear-gradient(45deg, #f4d609 0%, #f4d609 10%, #212121 10%, #212121 20%, #f4d609 20%, #f4d609 30%, #212121 30%,
+            #212121 40%, #f4d609 40%, #f4d609 50%, #212121 50%, #212121 60%, #f4d609 60%,
+            #f4d609 70%, #212121 70%, #212121 80%, #f4d609 80%, #f4d609 90%, #212121 90%, #212121 100%);
+    background-repeat: repeat;
+}
+
+.test-size {
+    min-height: 3rem;
+    min-width: 3rem;
+}
+
+.txt-title {
+    @include titlefont;
+    font-size: 2.045rem;
+}
+
+.txt-title-small {
+    @include titlefont;
+    font-size: 1.364rem;
+}
+
+.techfont {
+    @include techfont;
+}
+
+.txt-reading {
+    @include readingfont;
+}
+
+.no-anim {
+    @include noanim;
+}
+
+.txt {
+    color: $onBackground;
+}
+
+.txt-primary {
+    color: $primary;
+}
+
+.txt-onSecondaryContainer {
+    color: $onSecondaryContainer;
+}
+
+.txt-onSurfaceVariant {
+    color: $onSurfaceVariant;
+}
+
+.txt-onLayer1 {
+    color: $onLayer1;
+}
+
+.txt-shadow {
+    text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.69);
+    margin: 10px;
+}
+
+.txt-gigantic {
+    @include mainfont;
+    font-size: 3rem;
+}
+
+.txt-massive {
+    @include mainfont;
+    font-size: 2.7273rem;
+}
+
+.txt-hugerass {
+    @include mainfont;
+    font-size: 2.045rem;
+}
+
+.txt-hugeass {
+    @include mainfont;
+    font-size: 1.8182rem;
+}
+
+.txt-larger {
+    @include mainfont;
+    font-size: 1.6363rem;
+}
+
+.txt-large {
+    //16pt
+    @include mainfont;
+    font-size: 1.4545rem;
+}
+
+.txt-norm {
+    //14pt
+    @include mainfont;
+    font-size: 1.2727rem;
+}
+
+.txt-small {
+    //12pt
+    @include mainfont;
+    font-size: 1.0909rem;
+}
+
+.txt-smallie {
+    //11pt
+    @include mainfont;
+    font-size: 1rem;
+}
+
+.txt-smaller {
+    //10pt
+    @include mainfont;
+    font-size: 0.9091rem;
+}
+
+.txt-tiny {
+    @include mainfont;
+    font-size: 0.7273rem;
+}
+
+.txt-poof {
+    font-size: 0px;
+}
+
+.txt-subtext {
+    @include subtext;
+}
+
+.txt-action {
+    @include actiontext;
+}
+
+.txt-thin {
+    font-weight: 300;
+}
+
+.txt-semibold {
+    font-weight: 500;
+}
+
+.txt-bold {
+    font-weight: bold;
+}
+
+.txt-italic {
+    font-style: italic;
+}
+
+.btn-primary {
+    @include full-rounding;
+    background-color: $primary;
+    color: $onPrimary;
+    padding: 0.682rem 1.023rem;
+}
+
+.titlefont {
+    @include titlefont;
+}
+
+.mainfont {
+    @include mainfont;
+}
+
+.icon-material {
+    @include icon-material;
+}
+
+.icon-nerd {
+    @include icon-nerd;
+}
+
+.separator-line {
+    background-color: mix($subtext, $surface, 50%);
+    min-width: 0.068rem;
+    min-height: 0.068rem;
+}
+
+.separator-circle {
+    @include full-rounding;
+    background-color: $outline;
+    margin: 0rem 0.682rem;
+    min-width: 0.273rem;
+    min-height: 0.273rem;
+}
+
+.spacing-h-3>* {
+    margin-right: 0.205rem;
+}
+
+.spacing-h-3>*:last-child {
+    margin-right: 0rem;
+}
+
+.spacing-v-3>* {
+    margin-bottom: 0.205rem;
+}
+
+.spacing-v-3>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-v-15>* {
+    margin-bottom: 1.023rem;
+}
+
+.spacing-v-15>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-h-15>* {
+    margin-right: 1.023rem;
+}
+
+.spacing-h-15>*:last-child {
+    margin-right: 0rem;
+}
+
+.spacing-h-15>revealer>* {
+    margin-right: 1.023rem;
+}
+
+.spacing-h-15>revealer:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-h-15>scrolledwindow>* {
+    margin-right: 1.023rem;
+}
+
+.spacing-h-15>scrolledwindow:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-v-5>box {
+    margin-bottom: 0.341rem;
+}
+
+.spacing-v-5>box:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-v-5>* {
+    margin-bottom: 0.341rem;
+}
+
+.spacing-v-5>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-v-5-revealer>revealer>* {
+    margin-bottom: 0.341rem;
+}
+
+.spacing-v-5-revealer>revealer:last-child>* {
+    margin-bottom: 0rem;
+}
+
+.spacing-v-5-revealer>scrolledwindow>* {
+    margin-bottom: 0.341rem;
+}
+
+.spacing-v-5-revealer>scrolledwindow:last-child>* {
+    margin-bottom: 0rem;
+}
+
+.spacing-h-4>* {
+    margin-right: 0.273rem;
+}
+
+.spacing-h-4>*:last-child {
+    margin-right: 0rem;
+}
+
+.spacing-h-4>overlay>*:first-child {
+    margin-right: 0.273rem;
+}
+
+.spacing-h-4>overlay:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-h-5>* {
+    margin-right: 0.341rem;
+}
+
+.spacing-h-5>*:last-child {
+    margin-right: 0rem;
+}
+
+.spacing-h-5>widget>* {
+    margin-right: 0.341rem;
+}
+
+.spacing-h-5>widget:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-h-5>revealer>* {
+    margin-right: 0.341rem;
+}
+
+.spacing-h-5>revealer:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-h-5>scrolledwindow>* {
+    margin-right: 0.341rem;
+}
+
+.spacing-h-5>scrolledwindow:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-v-minus5>* {
+    margin-bottom: -0.341rem;
+}
+
+.spacing-v-minus5>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-h-10>* {
+    margin-right: 0.682rem;
+}
+
+.spacing-h-10>*:last-child {
+    margin-right: 0rem;
+}
+
+.spacing-h-10>revealer>* {
+    margin-right: 0.682rem;
+}
+
+.spacing-h-10>revealer:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-h-10>scrolledwindow>* {
+    margin-right: 0.682rem;
+}
+
+.spacing-h-10>scrolledwindow:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-h-10>flowboxchild>* {
+    margin-right: 0.682rem;
+}
+
+.spacing-h-10>flowboxchild:last-child>* {
+    margin-right: 0rem;
+}
+
+.spacing-v-10>* {
+    margin-bottom: 0.682rem;
+}
+
+.spacing-v-10>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-h-20>* {
+    margin-right: 1.364rem;
+}
+
+.spacing-h-20>*:last-child {
+    margin-right: 0rem;
+}
+
+.spacing-v-20>* {
+    margin-bottom: 1.364rem;
+}
+
+.spacing-v-20>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-h-30>* {
+    margin-right: 1.364rem;
+}
+
+.spacing-h-30>*:last-child {
+    margin-right: 0rem;
+}
+
+.spacing-v-30>* {
+    margin-bottom: 1.364rem;
+}
+
+.spacing-v-30>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.anim-enter {
+    @include anim-enter;
+}
+
+.anim-exit {
+    @include anim-exit;
+}
+
+.button-minsize {
+    @include button-minsize;
+}
+
+@each $spacing in (5, 8, 10, 15, 20) {
+    @each $dir in ("top", "bottom", "left", "right") {
+        .margin-#{$dir}-#{$spacing} {
+            margin-#{$dir}: 0.068rem * $spacing;
+        }
+        .padding-#{$dir}-#{$spacing} {
+            padding-#{$dir}: 0.068rem * $spacing;
+        }
+    }
+    .padding-#{$spacing} {
+        padding: 0.068rem * $spacing;
+    }
+    .margin-#{$spacing} {
+        padding: 0.068rem * $spacing;
+    }
+}
+
+.width-10 {
+    min-width: 0.682rem;
+}
+
+.height-10 {
+    min-width: 0.682rem;
+}
+
+.invisible {
+    opacity: 0;
+    background-color: transparent;
+    color: transparent;
+}
+
+.spacing-h--5>box {
+    margin-right: -0.341rem;
+}
+
+.spacing-h--5>box:last-child {
+    margin-right: 0rem;
+}
+
+.spacing-v--5>* {
+    margin-bottom: -0.341rem;
+}
+
+.spacing-v--5>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-h--10>* {
+    margin-left: -1.364rem;
+}
+
+.spacing-h--10>*:first-child {
+    margin-left: 0rem;
+}
+
+.spacing-v--10>* {
+    margin-bottom: -0.682rem;
+}
+
+.spacing-v--10>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-v--10>* {
+    margin-bottom: -0.682rem;
+}
+
+.spacing-v--10>*:last-child {
+    margin-bottom: 0rem;
+}
+
+.spacing-h--20>* {
+    margin-left: -1.364rem;
+}
+
+.spacing-h--20>*:first-child {
+    margin-left: 0rem;
+}
+
+.instant {
+    transition: 0ms;
+}
+
+.menu-decel {
+    @include menu_decel;
+}
+
+.element-show {
+    @include element_easeInOut;
+}
+
+.element-hide {
+    @include element_easeInOut;
+}
+
+.element-move {
+    @include element_easeInOut;
+}
+
+.element-decel {
+    @include element_decel;
+}
+
+.element-bounceout {
+    @include element_bounceOut;
+}
+
+.element-accel {
+    @include element_accel;
+}
+@mixin group-padding {
+    padding: 0.341rem;
+}
+
+.sidebar-right {
+    @include menu_decel;
+    @include elevation-border;
+    @include elevation2;
+    border-radius: $rounding_large - $elevation_margin + 0.068rem;
+    min-width: 27.818rem;
+    background-color: $background;
+    padding: 1.023rem;
+}
+
+.sidebar-left {
+    @include menu_decel;
+    @include elevation-border;
+    @include elevation2;
+    border-radius: $rounding_large - $elevation_margin + 0.068rem;
+    min-width: 27.818rem;
+    background-color: $background;
+    padding: 1.023rem;
+}
+
+.sidebar-group {
+    @include normal-rounding;
+    @include group-padding;
+    background-color: $layer1;
+}
+
+.sidebar-group-nopad {
+    @include normal-rounding;
+    background-color: $layer1;
+}
+
+.sidebar-group-invisible {
+    @include group-padding;
+}
+
+.sidebar-group-invisible-morehorizpad {
+    padding: 0.341rem 0.682rem;
+}
+
+.sidebar-togglesbox {
+    @include full-rounding;
+    @include group-padding;
+    background-color: $layer1;
+}
+
+.sidebar-iconbutton {
+    @include full-rounding;
+    @include element_decel;
+    color: $onSurface;
+    min-width: 2.727rem;
+    min-height: 2.727rem;
+}
+
+.sidebar-iconbutton:hover,
+.sidebar-iconbutton:focus {
+    background-color: $layer1Hover;
+}
+
+.sidebar-iconbutton:active {
+    background-color: $layer1Active;
+}
+
+.sidebar-button-active {
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.sidebar-button-active:hover,
+.sidebar-button-active:focus {
+    background-color: mix($primary, $layer1Hover, 70%);
+}
+
+.sidebar-button-active:active {
+    background-color: mix($primary, $layer1Active, 40%);
+}
+
+.sidebar-buttons-separator {
+    min-width: 0.068rem;
+    min-height: 0.068rem;
+    background-color: $onSurfaceVariant;
+}
+
+.sidebar-navrail {
+    padding: 0rem $rounding_medium;
+}
+
+.sidebar-navrail-btn>box>label {
+    @include full-rounding;
+    @include menu_decel;
+}
+
+.sidebar-navrail-btn:hover>box>label:first-child,
+.sidebar-navrail-btn:focus>box>label:first-child {
+    background-color: $layer1Hover;
+}
+
+.sidebar-navrail-btn:active>box>label:first-child {
+    background-color: $layer1Active;
+}
+
+.sidebar-navrail-btn-active>box>label:first-child {
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+}
+
+.sidebar-navrail-btn-active:hover>box>label:first-child,
+.sidebar-navrail-btn-active:focus>box>label:first-child {
+    background-color: mix($secondaryContainer, $layer1Hover, 90%);
+    color: mix($onSecondaryContainer, $layer1Hover, 90%);
+}
+
+.sidebar-sysinfo-grouppad {
+    padding: 1.159rem;
+}
+
+.sidebar-memory-ram-circprog {
+    @include fluent_decel_long;
+    min-width: $rounding_small;
+    min-height: 4.091rem;
+    padding: 0.409rem;
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+    font-size: 0px;
+}
+
+.sidebar-memory-swap-circprog {
+    @include fluent_decel_long;
+    min-width: $rounding_small;
+    min-height: 2.255rem;
+    padding: 0.409rem;
+    margin: 0.918rem;
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+    font-size: 0px;
+}
+
+.sidebar-cpu-circprog {
+    min-width: $rounding_small;
+    min-height: 3.409rem;
+    padding: 0.409rem;
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+    @include fluent_decel_long;
+    font-size: 0px;
+}
+
+.sidebar-scrollbar {
+    trough {
+        @include full-rounding;
+        min-width: 0.545rem;
+        background-color: transparent;
+    }
+
+    slider {
+        @include full-rounding;
+        @include element_decel;
+        min-width: 0.273rem;
+        min-height: 2.045rem;
+        background-color: transparentize($onSurfaceVariant, 0.7);
+    }
+
+    slider:hover,
+    slider:focus {
+        background-color: transparentize($onSurfaceVariant, 0.6);
+    }
+
+    slider:active {
+        background-color: transparentize($onSurface, 0.5);
+    }
+}
+
+.sidebar-calendar-btn {
+    @include full-rounding;
+    @include element_decel;
+    min-height: 2.523rem;
+    min-width: 2.523rem;
+    color: $onSurface;
+}
+
+.sidebar-calendar-btn:hover,
+.sidebar-calendar-btn:focus {
+    background-color: $hovercolor;
+}
+
+.sidebar-calendar-btn:active {
+    background-color: $activecolor;
+}
+
+.sidebar-calendar-btn-txt {
+    margin-left: -10.341rem;
+    margin-right: -10.341rem;
+}
+
+.sidebar-calendar-btn-today {
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.sidebar-calendar-btn-today:hover,
+.sidebar-calendar-btn-today:focus {
+    background-color: mix($primary, $hovercolor, 70%);
+}
+
+.sidebar-calendar-btn-today:active {
+    background-color: mix($primary, $hovercolor, 40%);
+}
+
+.sidebar-calendar-btn-othermonth {
+    color: $outline;
+}
+
+.sidebar-calendar-header {
+    margin: 0.341rem;
+}
+
+.sidebar-calendar-monthyear-btn {
+    @include full-rounding;
+    @include element_decel;
+    padding: 0rem 0.682rem;
+    background-color: $layer2;
+    color: $onSurface;
+}
+
+.sidebar-calendar-monthyear-btn:hover,
+.sidebar-calendar-monthyear-btn:focus {
+    background-color: $hovercolor;
+}
+
+.sidebar-calendar-monthyear-btn:active {
+    background-color: $activecolor;
+}
+
+.sidebar-calendar-monthshift-btn {
+    @include full-rounding;
+    @include element_decel;
+    min-width: 2.045rem;
+    min-height: 2.045rem;
+    background-color: $layer2;
+    color: $outline;
+}
+
+.sidebar-calendar-monthshift-btn:hover {
+    background-color: $hovercolor;
+}
+
+.sidebar-calendar-monthshift-btn:active {
+    background-color: $activecolor;
+}
+
+.sidebar-todo-item {
+    @include small-rounding;
+    margin-right: 0.545rem;
+    // padding: 0.341rem;
+    background-color: $layer2;
+    color: $onLayer2;
+}
+
+.sidebar-todo-txt {
+    margin: 0.682rem;
+    margin-bottom: 0rem;
+}
+
+.sidebar-todo-actions {
+    margin: 0.341rem;
+    margin-top: 0rem;
+    margin-right: 0rem;
+}
+
+.sidebar-todo-item-action {
+    @include element_decel;
+    border-radius: 9999px;
+    min-width: 1.705rem;
+    min-height: 1.705rem;
+}
+
+.sidebar-todo-item-action:hover,
+.sidebar-todo-item-action:focus {
+    background-color: $layer2Hover;
+}
+
+.sidebar-todo-item-action:active {
+    background-color: $layer2Active;
+}
+
+.sidebar-todo-crosser {
+    transition: margin 200ms cubic-bezier(0.1, 1, 0, 1), background-color 0ms;
+    min-width: 0rem;
+}
+
+.sidebar-todo-crosser-crossed {
+    background-color: $onBackground;
+}
+
+.sidebar-todo-crosser-removed {
+    background-color: $error;
+}
+
+.sidebar-todo-new {
+    @include full-rounding;
+    @include element_decel;
+    background-color: $layer2;
+    color: $onLayer2;
+    margin: 0.341rem;
+    padding: 0.205rem 0.545rem;
+}
+
+.sidebar-todo-new,
+.sidebar-todo-new:focus {
+    color: $onSecondaryContainer;
+    background-color: $secondaryContainer;
+}
+
+.sidebar-todo-new:active {
+    color: $onPrimaryContainer;
+    background-color: $primaryContainer;
+}
+
+.sidebar-todo-add {
+    @include element_decel;
+    @include small-rounding;
+    min-width: 1.705rem;
+    min-height: 1.705rem;
+    color: $onSecondaryContainer;
+    border: 0.068rem solid $onSurface;
+}
+
+.sidebar-todo-add:hover,
+.sidebar-todo-add:focus {
+    background-color: $surfaceContainerHigh;
+}
+
+.sidebar-todo-add:active {
+    background-color: $surfaceContainerHighest;
+}
+
+.sidebar-todo-add-available {
+    @include element_decel;
+    @include small-rounding;
+    min-width: 1.705rem;
+    min-height: 1.705rem;
+    background-color: $primary;
+    color: $onPrimary;
+    border: 0.068rem solid $primary;
+}
+
+.sidebar-todo-add-available:hover,
+.sidebar-todo-add-available:focus {
+    background-color: mix($primary, $hovercolor, 70%);
+}
+
+.sidebar-todo-add-available:active {
+    background-color: mix($primary, $hovercolor, 40%);
+}
+
+.sidebar-todo-entry {
+    @include element_decel;
+    @include small-rounding;
+    background-color: $surfaceVariant;
+    color: $onSurfaceVariant;
+    caret-color: $onSurfaceVariant;
+    margin: 0rem 0.341rem;
+    min-height: 1.773rem;
+    min-width: 0rem;
+    padding: 0.205rem 0.682rem;
+    border: 0.068rem solid $outline;
+}
+
+.sidebar-todo-entry:focus {
+    border: 0.068rem solid $onSurfaceVariant;
+}
+
+.sidebar-module {
+    @include normal-rounding;
+    @include group-padding;
+    background-color: $layer1;
+    padding: 0.682rem;
+}
+
+.sidebar-module-btn-arrow {
+    @include full-rounding;
+    @include icon-material;
+    background-color: $layer2;
+    min-width: 1.705rem;
+    min-height: 1.705rem;
+
+    &:hover,
+    &:focus {
+        background-color: $layer2Hover;
+    }
+
+    &:active {
+        background-color: $layer2Active;
+    }
+}
+
+.sidebar-module-scripts-button {
+    @include full-rounding;
+    @include icon-material;
+    background-color: $layer1;
+    min-width: 1.705rem;
+    min-height: 1.705rem;
+
+    &:hover,
+    &:focus {
+        background-color: $layer1Hover;
+    }
+
+    &:active {
+        background-color: $layer1Active;
+    }
+}
+
+$colorpicker_rounding: 0.341rem;
+
+.sidebar-module-colorpicker-wrapper {
+    padding: 0.341rem;
+}
+
+.sidebar-module-colorpicker-cursorwrapper {
+    padding: 0.341rem 0.136rem;
+}
+
+.sidebar-module-colorpicker-hue {
+    min-height: 13.636rem;
+    min-width: 1.091rem;
+    border-radius: $colorpicker_rounding;
+}
+
+.sidebar-module-colorpicker-hue-cursor {
+    background-color: $onBackground;
+    border: 0.136rem solid $onBackground;
+    min-height: 0.136rem;
+    margin-top: -0.136rem;
+    border-radius: $colorpicker_rounding;
+}
+
+.sidebar-module-colorpicker-saturationandlightness-wrapper {
+    padding: 0.341rem;
+}
+
+.sidebar-module-colorpicker-saturationandlightness {
+    min-height: 13.636rem;
+    min-width: 13.636rem;
+    border-radius: $colorpicker_rounding;
+}
+
+.sidebar-module-colorpicker-saturationandlightness-cursorwrapper {
+    padding: 0.341rem;
+    margin-top: -0.409rem;
+    margin-left: -0.409rem;
+}
+
+.sidebar-module-colorpicker-saturationandlightness-cursor {
+    @include full-rounding;
+    border: 0.136rem solid white;
+    min-width: 0.682rem;
+    min-height: 0.682rem;
+    margin-top: -0.409rem;
+    margin-left: -0.409rem;
+}
+
+.sidebar-module-colorpicker-result-area {
+    padding: 0.341rem;
+}
+
+.sidebar-module-colorpicker-result-box {
+    border-radius: $colorpicker_rounding;
+    min-width: 2.045rem;
+    min-height: 0.682rem;
+    padding: 0.341rem;
+}
+
+.sidebar-icontabswitcher {
+    @include full-rounding;
+    @include group-padding;
+    background-color: $layer1;
+}
+
+.sidebar-chat-providerswitcher {
+    @include small-rounding;
+    padding: 0.477rem 0.682rem;
+    background-color: $surfaceContainerHigh;
+    color: $onSurfaceVariant;
+}
+
+.sidebar-chat-viewport {
+    @include element_decel;
+    padding: 0.682rem 0rem;
+}
+
+.sidebar-chat-textarea {
+    @include normal-rounding;
+    background-color: $layer1;
+    color: $onLayer1;
+    padding: 0.682rem;
+}
+
+.sidebar-chat-entry {
+    color: $onSurfaceVariant;
+    caret-color: $onSurfaceVariant;
+    min-height: 1.773rem;
+    min-width: 0rem;
+}
+
+.sidebar-chat-wrapper {
+    transition: 400ms cubic-bezier(0.1, 1, 0, 1);
+}
+
+.sidebar-chat-wrapper-extended {
+    min-height: 7.500rem;
+}
+
+.sidebar-chat-send {
+    @include element_decel;
+    min-width: 1.705rem;
+    min-height: 1.705rem;
+    border-radius: $rounding_medium - 0.681rem;
+}
+
+.sidebar-chat-send:hover,
+.sidebar-chat-send:focus {
+    background-color: $surfaceBright;
+}
+
+.sidebar-chat-send:active {
+    background-color: $surfaceVariant;
+}
+
+.sidebar-chat-send-available {
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.sidebar-chat-send-available:hover,
+.sidebar-chat-send-available:focus {
+    background-color: mix($primary, $hovercolor, 70%);
+}
+
+.sidebar-chat-send-available:active {
+    background-color: mix($primary, $hovercolor, 40%);
+}
+
+.sidebar-chat-messagearea {
+    margin: 0.341rem;
+}
+
+.sidebar-chat-message {
+    @include normal-rounding;
+    @include group-padding;
+    background-color: $layer1;
+}
+
+$skeleton-accent: mix($secondary, $onSecondary, 50%);
+
+@keyframes sidebar-chat-message-skeletonline-anim {
+    0% {
+        background-position: 175% 0%;
+    }
+
+    100% {
+        background-position: 50% 0%;
+    }
+}
+
+.sidebar-chat-message-skeletonline {
+    border-radius: $rounding_verysmall;
+    min-height: 1.364rem;
+    background-color: $layer2;
+}
+
+.sidebar-chat-message-skeletonline-offset0 {
+    background-repeat: no-repeat;
+    background: linear-gradient(to right, $layer3 0%, $skeleton-accent 25%, $layer3 50%, $layer3 100%);
+    background-size: 500% 500%;
+    animation: sidebar-chat-message-skeletonline-anim 2s linear;
+    animation-iteration-count: infinite;
+}
+
+.sidebar-chat-message-skeletonline-offset1 {
+    background-repeat: no-repeat;
+    background: linear-gradient(to right, $layer3 0%, $layer3 50%, $skeleton-accent 75%, $layer3 100%);
+    background-size: 500% 500%;
+    animation: sidebar-chat-message-skeletonline-anim 2s linear;
+    animation-iteration-count: infinite;
+}
+
+.sidebar-chat-message-skeletonline-offset2 {
+    margin-right: 5.795rem;
+    background-repeat: no-repeat;
+    background: linear-gradient(to right, $layer3 0%, $layer3 25%, $skeleton-accent 50%, $layer3 75%, $layer3 100%);
+    background-size: 500% 500%;
+    animation: sidebar-chat-message-skeletonline-anim 2s linear;
+    animation-iteration-count: infinite;
+}
+
+.sidebar-chat-indicator {
+    @include element_decel;
+    @include full-rounding;
+    min-width: 0.136rem;
+}
+
+.sidebar-chat-indicator-waifu {
+    @include element_decel;
+    @include full-rounding;
+    min-width: 0.136rem;
+    background-color: $onBackground;
+}
+
+.sidebar-chat-name {
+    @include titlefont;
+    @include small-rounding;
+    padding: 0.341rem 0.818rem;
+    margin: 0.341rem;
+    background-color: $layer2;
+    color: $onLayer2;
+}
+
+.sidebar-chat-name-user {
+    background-color: $layer2;
+    color: $onLayer2;
+}
+
+.sidebar-chat-name-bot {
+    background-color: $secondary;
+    color: $onSecondary;
+}
+
+.sidebar-chat-name-system {
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+}
+
+.sidebar-chat-txtblock {
+    margin-left: -0.136rem;
+    padding: 0.341rem;
+    padding-left: 0.818rem;
+}
+
+.sidebar-chat-txt {
+    @include readingfont;
+}
+
+.sidebar-chat-latex {
+    @include small-rounding;
+    margin: 0rem 0.682rem;
+    padding: 0.682rem;
+    color: $onBackground;
+}
+
+.sidebar-chat-codeblock {
+    @include normal-rounding;
+    background-color: $layer2;
+    color: $onLayer2;
+    margin: 0rem 0.682rem;
+}
+
+.sidebar-chat-codeblock-topbar {
+    @include mainfont;
+    background-color: $layer3;
+    color: $onLayer3;
+    border-top-left-radius: $rounding_small;
+    border-top-right-radius: $rounding_small;
+    padding: 0.341rem 0.477rem;
+}
+
+.sidebar-chat-codeblock-topbar-txt {
+    @include full-rounding;
+    padding: 0.273rem;
+}
+
+.sidebar-chat-codeblock-topbar-btn {
+    @include full-rounding;
+    @include element_decel;
+    padding: 0.273rem 0.477rem;
+}
+
+.sidebar-chat-codeblock-topbar-btn:hover,
+.sidebar-chat-codeblock-topbar-btn:focus {
+    background-color: $surfaceBright;
+}
+
+.sidebar-chat-codeblock-topbar-btn:active {
+    background-color: $surfaceVariant;
+}
+
+.sidebar-chat-codeblock-code {
+    @include techfont;
+    padding: 0.682rem;
+}
+
+.sidebar-chat-divider {
+    min-height: 1px;
+    background-color: $sidebar_chat_textboxareaColor;
+    margin: 0rem 0.545rem;
+}
+
+.sidebar-chat-welcome-txt {
+    margin: 0rem 3.409rem;
+}
+
+.sidebar-chat-settings-toggles {
+    margin: 0rem 5.455rem;
+}
+
+.sidebar-chat-welcome-icon {
+    @include full-rounding;
+    font-size: 4rem;
+}
+
+.sidebar-chat-welcome-logo {
+    @include full-rounding;
+    @include element_decel;
+    @include icon-material;
+    min-height: 4.773rem;
+    min-width: 4.773rem;
+    font-size: 3.076rem;
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
+}
+
+.sidebar-chat-chip {
+    @include element_decel;
+    @include small-rounding;
+    padding: 0.341rem 0.477rem;
+}
+
+.sidebar-chat-chip-action {
+    @include element_decel;
+    background-color: $layer2;
+    color: $onSurfaceVariant;
+}
+
+.sidebar-chat-chip-action:hover,
+.sidebar-chat-chip-action:focus {
+    background-color: $hovercolor;
+}
+
+.sidebar-chat-chip-action:active {
+    background-color: $activecolor;
+}
+
+.sidebar-chat-chip-action-active {
+    color: $sidebar_chat_textboxareaColor;
+    border: 0.068rem solid $sidebar_chat_textboxareaColor;
+}
+
+.sidebar-chat-chip-toggle {
+    @include element_decel;
+    @include small-rounding;
+    padding: 0.341rem 0.477rem;
+    background-color: $layer3;
+    color: $onSurfaceVariant;
+}
+
+.sidebar-chat-chip-toggle:focus,
+.sidebar-chat-chip-toggle:hover {
+    background-color: $hovercolor;
+}
+
+.sidebar-chat-chip-toggle:active {
+    background-color: $activecolor;
+}
+
+.sidebar-pin {
+    @include small-rounding;
+    @include element_decel;
+    min-height: 2.386rem;
+    min-width: 2.386rem;
+    color: $onSurface;
+}
+
+.sidebar-pin:hover,
+.sidebar-pin:focus {
+    background-color: $hovercolor;
+}
+
+.sidebar-pin:active {
+    background-color: $activecolor;
+}
+
+.sidebar-pin-enabled {
+    background-color: $primary;
+
+    label {
+        color: $onPrimary;
+    }
+}
+
+.sidebar-pin-enabled:hover,
+.sidebar-pin-enabled:focus {
+    background-color: mix($primary, $hovercolor, 70%);
+}
+
+.sidebar-pin-enabled:active {
+    background-color: mix($primary, $hovercolor, 40%);
+}
+
+.sidebar-waifu-heading {
+    @include titlefont;
+    padding: 0.341rem;
+    margin-left: -0.136rem;
+    padding-left: 0.818rem;
+}
+
+.sidebar-waifu-txt {
+    @include mainfont;
+}
+
+.sidebar-waifu-image {
+    @include normal-rounding;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.sidebar-waifu-image-actions {
+    @include element_decel;
+    padding: 0.313rem;
+}
+
+$waifu_image_overlay_transparency: 0.7;
+
+.sidebar-waifu-image-action {
+    @include full-rounding;
+    min-width: 1.875rem;
+    min-height: 1.875rem;
+    background-color: rgba(0, 0, 0, $waifu_image_overlay_transparency ); // Fixed cuz on image
+    color: rgba(255, 255, 255, $waifu_image_overlay_transparency);
+}
+
+.sidebar-waifu-image-action:hover,
+.sidebar-waifu-image-action:focus {
+    background-color: rgba(30, 30, 30, $waifu_image_overlay_transparency);
+}
+
+.sidebar-waifu-image-action:active {
+    background-color: rgba(60, 60, 60, $waifu_image_overlay_transparency);
+}
+
+.sidebar-booru-provider {
+    @include titlefont;
+    @include small-rounding;
+    padding: 0.341rem 0.818rem;
+    margin: 0.341rem;
+    font-weight: bold;
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.sidebar-booru-imagegrid {
+    @include normal-rounding;
+}
+
+.sidebar-booru-image {
+    @include small-rounding;
+    margin: 0.273rem;
+    min-width: 11.932rem;
+    // background-color: rgba(100, 200, 0, 0.3);
+}
+
+.sidebar-booru-image-drawingarea {
+    // background-color: rgba(200, 100, 0, 0.3);
+    @include small-rounding;
+    min-width: 12.273rem;
+    min-height: 12.273rem;
+}
+
+.sidebar-booru-image-actions {
+    // background-color: rgba(100, 100, 0, 0.3);
+    @include element_decel;
+    margin: 0.545rem;
+}
+
+.sidebar-volmixer-stream {
+    border-bottom: 0.068rem solid $outlineVariant;
+    padding: 0.682rem;
+    color: $onSurface;
+}
+
+.sidebar-volmixer-stream-appicon {
+    font-size: 3.273rem;
+}
+
+.sidebar-volmixer-stream-slider {
+    trough {
+        border-radius: $rounding_verysmall;
+        min-height: 1.364rem;
+        min-width: 1.364rem;
+        background-color: $secondaryContainer;
+    }
+
+    highlight {
+        border-radius: $rounding_verysmall;
+        min-height: 1.364rem;
+        min-width: 1.364rem;
+        background-color: $primary;
+    }
+
+    slider {
+        border-radius: $rounding_verysmall;
+        min-height: 1.364rem;
+        min-width: 1.364rem;
+    }
+}
+
+.sidebar-volmixer-status {
+    color: $onSurface;
+    margin: 0rem 0.682rem;
+}
+
+.sidebar-volmixer-deviceselector {
+    @include small-rounding;
+    padding: 0.477rem 0.682rem;
+    background-color: $surfaceContainerHigh;
+    color: $onSurfaceVariant;
+}
+
+.sidebar-bluetooth-device {
+    padding: 0.682rem;
+    @include normal-rounding;
+    background-color: $layer2;
+    color: $onLayer2;
+}
+
+.sidebar-bluetooth-appicon {
+    @include symbolic-icon;
+    font-size: 2.045rem;
+}
+
+.sidebar-bluetooth-device-remove {
+    @include full-rounding;
+    min-width: 2.045rem;
+    min-height: 2.045rem;
+    // background-color: $layer3;
+    padding: 0.341rem;
+}
+
+.sidebar-bluetooth-device-remove:hover,
+.sidebar-bluetooth-device-remove:focus {
+    @include full-rounding;
+    background-color: $layer2Hover;
+    padding: 0.341rem;
+}
+
+.sidebar-wifinetworks-network {
+    padding: 0.682rem;
+    @include normal-rounding;
+    background-color: $layer2;
+    color: $onLayer2;
+}
+
+.sidebar-wifinetworks-network:hover,
+.sidebar-wifinetworks-network:focus {
+    background-color: $layer2Hover;
+}
+
+.sidebar-wifinetworks-network:active {
+    background-color: $layer2Active;
+}
+
+.sidebar-wifinetworks-signal {
+    @include symbolic-icon;
+    font-size: 2.045rem;
+}
+
+.sidebar-wifinetworks-auth-entry {
+    @include small-rounding;
+    background-color: $layer1;
+    color: $onLayer1;
+    padding: 0.682rem;
+}
+
+.sidebar-centermodules-bottombar-button {
+    @include full-rounding;
+    @include element_decel;
+    min-width: 6.818rem;
+    min-height: 2.25rem;
+    background-color: $layer2;
+    color: $onLayer2;
+}
+
+.sidebar-centermodules-bottombar-button:hover,
+.sidebar-centermodules-bottombar-button:focus {
+    background-color: $layer2Hover;
+}
+
+.sidebar-centermodules-bottombar-button:active {
+    background-color: $layer2Active;
+}
+
+.sidebar-centermodules-scrollgradient-bottom {
+    background: linear-gradient(to top, $layer1 0%, transparentize($layer1, 1) 1.023rem);
+}
+

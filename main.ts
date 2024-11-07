@@ -12,6 +12,7 @@ import OSD from "widget/osd/OSD"
 import Verification from "widget/powermenu/Verification"
 import PowerMenu from "widget/powermenu/PowerMenu"
 import SettingsDialog from "widget/settings/SettingsDialog"
+import Sideleft from "widget/sideleft/main"
 
 
 App.config({
@@ -34,6 +35,7 @@ App.config({
         PowerMenu(),
         SettingsDialog(),
         Verification(),
+        Sideleft(),
     ],
 })
 

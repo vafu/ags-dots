@@ -1,7 +1,7 @@
 import { type WindowProps } from "types/widgets/window"
 import { type RevealerProps } from "types/widgets/revealer"
 import { type EventBoxProps } from "types/widgets/eventbox"
-import type Gtk from "gi://Gtk?version=3.0"
+import type Gtk from "gi://Gtk?version=4.0"
 import options from "options"
 
 type Transition = RevealerProps["transition"]
@@ -99,6 +99,18 @@ const Layout = (name: string, child: Child, transition?: Transition) => ({
         ),
         Padding(name),
     ),
+    "left": () => Widget.Box({},
+        Widget.Box(
+            {
+                hexpand: false,
+                vexpand: true,
+                vertical: true,
+            },
+            PopupRevealer(name, child, transition),
+            // Padding(name),
+        ),
+        // Padding(name),
+    ),
     "bottom-left": () => Widget.Box({},
         Widget.Box(
             {
@@ -149,7 +161,7 @@ export default ({
     visible: false,
     keymode: "on-demand",
     exclusivity,
-    layer: "top",
+    layer: "overlay",
     anchor: ["top", "bottom", "right", "left"],
     child: Layout(name, child, transition)[layout](),
     ...props,
