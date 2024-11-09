@@ -16,7 +16,7 @@ if (!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`)) {
 }
 
 Utils.exec(`mkdir -p ${GLib.get_user_state_dir()}/ags/user/ai`)
-const KEY_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/ai/google_key.txt`
+const KEY_FILE_LOCATION = `${GLib.get_home_dir()}/.secrets/gemini-api-key`
 const APIDOM_FILE_LOCATION = `${GLib.get_user_state_dir()}/ags/user/ai/google_api_dom.txt`
 /**
  * @param {string} URL
