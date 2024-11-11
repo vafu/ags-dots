@@ -20,8 +20,6 @@ const {
 } = options
 
 const {
-    dark,
-    light,
     blur,
     scheme,
     padding,
@@ -40,12 +38,8 @@ export default [
             Row({ opt: scheme, title: "Color Scheme", type: "enum", enums: ["dark", "light"] }),
         ),
         Group("Dark Colors",
-            Row({ opt: dark.bg, title: "Background", type: "color" }),
-            Row({ opt: dark.fg, title: "Foreground", type: "color" }),
         ),
         Group("Light Colors",
-            Row({ opt: light.bg, title: "Background", type: "color" }),
-            Row({ opt: light.fg, title: "Foreground", type: "color" }),
         ),
         Group("Theme",
             Row({ opt: shadows, title: "Shadows" }),

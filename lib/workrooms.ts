@@ -1,7 +1,7 @@
 import options from "options"
 import { obtainService } from "./services"
 
-const colors = ["blue", "aqua", "purple", "yellow"]
+const colors = ["blue", "orange", "green", "yellow"]
 const wrservice = await obtainService("workspace")
 
 export default async function init() {
