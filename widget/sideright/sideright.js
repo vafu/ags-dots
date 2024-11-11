@@ -47,11 +47,6 @@ const centerWidgets = [
         contentWidget: ModuleWifiNetworks,
         onFocus: () => execAsync("nmcli dev wifi list").catch(print),
     },
-    {
-        name: "Live config",
-        materialIcon: "tune",
-        contentWidget: ModuleConfigure,
-    },
 ]
 
 const timeRow = Box({
@@ -121,10 +116,7 @@ const togglesBox = Widget.Box({
         ToggleIconBluetooth(),
         // await ModuleRawInput(),
         // await HyprToggleIcon('touchpad_mouse', 'No touchpad while typing', 'input:touchpad:disable_while_typing', {}),
-        await ModuleNightLight(),
-        await ModuleInvertColors(),
         ModuleIdleInhibitor(),
-        await ModuleCloudflareWarp(),
     ],
 })
 

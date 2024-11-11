@@ -1,0 +1,91 @@
+{
+    "name": "Gruvbox Dark",
+    "variables": {
+        "accent_color": "#fbf1c7",
+        "accent_bg_color": "#ebdbb2",
+        "accent_fg_color": "#282828",
+        "destructive_color": "#fb4934",
+        "destructive_bg_color": "#cc241d",
+        "destructive_fg_color": "#ebdbb2",
+        "success_color": "#b8bb26",
+        "success_bg_color": "#98971a",
+        "success_fg_color": "#ebdbb2",
+        "warning_color": "#fabd2f",
+        "warning_bg_color": "#d79921",
+        "warning_fg_color": "#282828",
+        "error_color": "#fb4934",
+        "error_bg_color": "#cc241d",
+        "error_fg_color": "#ffffff",
+        "window_bg_color": "#282828",
+        "window_fg_color": "#ebdbb2",
+        "view_bg_color": "#282828",
+        "view_fg_color": "#ebdbb2",
+        "headerbar_bg_color": "#3c3836",
+        "headerbar_fg_color": "#fbf1c7",
+        "headerbar_border_color": "#fbf1c7",
+        "headerbar_backdrop_color": "@window_bg_color",
+        "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+        "card_bg_color": "#3c3836",
+        "card_fg_color": "#ebdbb2",
+        "card_shade_color": "rgba(0, 0, 0, 0.36)",
+        "dialog_bg_color": "#3c3836",
+        "dialog_fg_color": "#fbf1c7",
+        "popover_bg_color": "#3c3836",
+        "popover_fg_color": "#fbf1c7",
+        "shade_color": "rgba(0,0,0,0.36)",
+        "scrollbar_outline_color": "rgba(0,0,0,0.5)",
+        "sidebar_bg_color": "#282828",
+        "sidebar_fg_color": "#ebdbb2",
+        "sidebar_backdrop_color": "#282828",
+        "sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+    },
+    "palette": {
+        "blue_": {
+            "1": "#83a598",
+            "2": "#458588"
+        },
+        "green_": {
+            "1": "#b8bb26",
+            "2": "#98971a"
+        },
+        "yellow_": {
+            "1": "#fabd2f",
+            "2": "#d79921"
+        },
+        "orange_": {
+            "1": "#fe8019",
+            "2": "#d65d0e"
+        },
+        "red_": {
+            "1": "#fb4934",
+            "2": "#cc241d"
+        },
+        "purple_": {
+            "1": "#d3869b",
+            "2": "#b16286"
+        },
+        "aqua_": {
+            "1": "#8ec07c",
+            "2": "#689d6a"
+        },
+        "light_": {
+            "1": "#fbf1c7",
+            "2": "#ebdbb2",
+            "3": "#d5c4a1",
+            "4": "#bdae93",
+            "5": "#a89984"
+        },
+        "dark_": {
+            "1": "#282828",
+            "2": "#3c3836",
+            "3": "#504945",
+            "4": "#665c64",
+            "5": "#7c6f64"
+        }
+    },
+    "custom_css": {
+        "gtk4": "",
+        "gtk3": ""
+    },
+    "plugins": {}
+}
