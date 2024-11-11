@@ -8,19 +8,24 @@ const audio = await Service.import("audio")
 const network = await Service.import("network")
 const powerprof = await Service.import("powerprofiles")
 
-const ProfileIndicator = () => {
-    const visible = asusctl.available
-        ? asusctl.bind("profile").as(p => p !== "Balanced")
-        : powerprof.bind("active_profile").as(p => p !== "balanced")
-
+export const ProfileIndicator = () => {
     const icon = asusctl.available
         ? asusctl.bind("profile").as(p => icons.asusctl.profile[p])
         : powerprof.bind("active_profile").as(p => icons.powerprofile[p])
 
-    return Widget.Icon({ visible, icon })
+    return PanelButton({
+        child: Widget.Icon({ icon }),
+        onClicked: () => {
+            const profIdx = powerprof.profiles
+                .findIndex(p => p.Profile === powerprof.active_profile)
+            const newIdx = (profIdx + 1) % powerprof.profiles.length
+            const prof = powerprof.profiles[newIdx]
+            powerprof.active_profile = prof.Profile
+        },
+    })
 }
 
-const ModeIndicator = () => {
+export const ModeIndicator = () => {
     if (!asusctl.available) {
         return Widget.Icon({
             setup(self) {
@@ -35,7 +40,7 @@ const ModeIndicator = () => {
     })
 }
 
-const MicrophoneIndicator = () => Widget.Icon()
+export const MicrophoneIndicator = () => Widget.Icon()
     .hook(audio, self => self.visible =
         audio.recorders.length > 0
         || audio.microphone.is_muted
@@ -47,12 +52,12 @@ const MicrophoneIndicator = () => Widget.Icon()
         self.icon = cons.find(([n]) => n <= vol * 100)?.[1] || ""
     })
 
-const DNDIndicator = () => Widget.Icon({
+export const DNDIndicator = () => Widget.Icon({
     visible: notifications.bind("dnd"),
     icon: icons.notifications.silent,
 })
 
-const BluetoothIndicator = () => Widget.Overlay({
+export const BluetoothIndicator = () => Widget.Overlay({
     class_name: "bluetooth",
     passThrough: true,
     visible: bluetooth.bind("enabled"),
@@ -67,33 +72,17 @@ const BluetoothIndicator = () => Widget.Overlay({
     }),
 })
 
-const NetworkIndicator = () => Widget.Icon()
+export const NetworkIndicator = () => Widget.Icon()
     .hook(network, self => {
         const icon = network[network.primary || "wifi"]?.icon_name
         self.icon = icon || ""
         self.visible = !!icon
     })
 
-const AudioIndicator = () => Widget.Icon()
+export const AudioIndicator = () => Widget.Icon()
     .hook(audio.speaker, self => {
         const vol = audio.speaker.is_muted ? 0 : audio.speaker.volume
         const { muted, low, medium, high, overamplified } = icons.audio.volume
         const cons = [[101, overamplified], [67, high], [34, medium], [1, low], [0, muted]] as const
         self.icon = cons.find(([n]) => n <= vol * 100)?.[1] || ""
     })
-
-export default () => PanelButton({
-    window: "quicksettings",
-    on_clicked: () => App.toggleWindow("quicksettings"),
-    on_scroll_up: () => audio.speaker.volume += 0.02,
-    on_scroll_down: () => audio.speaker.volume -= 0.02,
-    child: Widget.Box([
-        ProfileIndicator(),
-        ModeIndicator(),
-        DNDIndicator(),
-        BluetoothIndicator(),
-        NetworkIndicator(),
-        AudioIndicator(),
-        MicrophoneIndicator(),
-    ]),
-})

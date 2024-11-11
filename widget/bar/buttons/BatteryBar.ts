@@ -70,21 +70,15 @@ const Regular = () => Widget.Box({
     class_name: "regular",
     children: [
         Indicator(),
-        PercentLabel(),
+        // PercentLabel(),
         // LevelBar(),
     ],
 })
 
-export default () => PanelButton({
+export default () => Widget.Box({
     class_name: "battery-bar",
-    hexpand: false,
-    on_clicked: () => { percentage.value = !percentage.value },
     visible: battery.bind("available"),
-    child: Widget.Box({
-        expand: true,
-        visible: battery.bind("available"),
-        child: bar.bind().as(b => b === "whole" ? WholeButton() : Regular()),
-    }),
+    child: bar.bind().as(b => b === "whole" ? WholeButton() : Regular()),
     setup: self => self
         .hook(bar, w => w.toggleClassName("bar-hidden", bar.value === "hidden"))
         .hook(battery, w => {

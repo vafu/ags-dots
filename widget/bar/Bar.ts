@@ -4,17 +4,31 @@ import Date from "./buttons/Date"
 import Media from "./buttons/Media"
 import PowerMenu from "./buttons/PowerMenu"
 import SysTray from "./buttons/SysTray"
-import SystemIndicators from "./buttons/SystemIndicators"
+import PanelButton from "./PanelButton"
 import Workspaces from "./buttons/Workspaces"
 import ScreenRecord from "./buttons/ScreenRecord"
 import Messages from "./buttons/Messages"
 import WindowTitle from "./WindowTitle"
 import options from "options"
+import {
+    ProfileIndicator,
+    NetworkIndicator,
+    AudioIndicator,
+    BluetoothIndicator,
+} from "./buttons/SystemIndicators"
 
-const { start, center, end } = options.bar.layout
+const { start, center, end, indicators } = options.bar.layout
 const { transparent, position } = options.bar
 
 export type BarWidget = keyof typeof widget
+
+const SystemIndicators = () => PanelButton({
+    window: "quicksettings",
+    on_clicked: () => App.toggleWindow("quicksettings"),
+    child: Widget.Box({
+        children: indicators.bind().as(c => c.map(w => widget[w]())),
+    }),
+})
 
 const widget = {
     battery: BatteryBar,
@@ -23,12 +37,19 @@ const widget = {
     media: Media,
     powermenu: PowerMenu,
     systray: SysTray,
-    system: SystemIndicators,
+    indicators: SystemIndicators,
     // taskbar: Taskbar,
     windowtitle: WindowTitle,
     workspaces: Workspaces,
     screenrecord: ScreenRecord,
     messages: Messages,
+    power_profile: ProfileIndicator,
+    // ModeIndicator,
+    // DNDIndicator,
+    bluetooth: BluetoothIndicator,
+    network: NetworkIndicator,
+    audio: AudioIndicator,
+    // microphone: MicrophoneIndicator,
     expander: () => Widget.Box({ expand: true }),
 }
 

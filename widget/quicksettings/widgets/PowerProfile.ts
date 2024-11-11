@@ -50,7 +50,6 @@ const AsusProfileSelector = () => Menu({
     ],
 })
 
-
 const pp = await Service.import("powerprofiles")
 const profile = pp.bind("active_profile")
 const profiles = pp.profiles.map(p => p.Profile)

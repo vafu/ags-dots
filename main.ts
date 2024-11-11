@@ -15,7 +15,6 @@ import SettingsDialog from "widget/settings/SettingsDialog"
 import Sideleft from "widget/sideleft/main"
 import { setupHyprland } from "lib/hyprland"
 
-
 App.config({
     onConfigParsed: () => {
         setupQuickSettings()

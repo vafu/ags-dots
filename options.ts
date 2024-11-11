@@ -70,15 +70,17 @@ const options = mkOptions(OPTIONS, {
             ]),
             end: opt<Array<import("widget/bar/Bar").BarWidget>>([
                 "expander",
-                "media",
+                "power_profile",
                 "systray",
-                "screenrecord",
-                "messages",
-                "system",
-                "battery",
-                "colorpicker",
-                "date",
+                "indicators",
             ]),
+            indicators: opt<Array<import("widget/bar/Bar").BarWidget>>([
+                "network",
+                "bluetooth",
+                "battery",
+                "messages",
+                "date"
+            ])
         },
         launcher: {
             icon: {
