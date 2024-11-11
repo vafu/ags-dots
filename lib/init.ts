@@ -9,7 +9,7 @@ export default function init() {
     try {
         config()
         gtk()
-        matugen()
+        // matugen()
         lowBattery()
         notifications()
         workrooms()

@@ -152,6 +152,7 @@ export default ({
     child,
     layout = "center",
     transition,
+    anchor = ["top", "bottom", "right", "left"],
     exclusivity = "ignore",
     ...props
 }: PopupWindowProps) => Widget.Window<Gtk.Widget>({
@@ -162,7 +163,7 @@ export default ({
     keymode: "on-demand",
     exclusivity,
     layer: "overlay",
-    anchor: ["top", "bottom", "right", "left"],
+    anchor: anchor,
     child: Layout(name, child, transition)[layout](),
     ...props,
 })

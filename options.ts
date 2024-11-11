@@ -7,34 +7,71 @@ const options = mkOptions(OPTIONS, {
     autotheme: opt(false),
     theme: {
         dark: {
-            primary: {
-                bg: opt("#282828"),
-                fg: opt("#ebdbb2"),
-            },
-            error: {
-                bg: opt("#cc241d"),
-                fg: opt("#fb4934"),
-            },
-            bg: opt("#1d2021"),
+            bg: opt("#282828"),
+            red: opt("#cc241d"),
+            green: opt("#98971a"),
+            yellow: opt("#d79921"),
+            blue: opt("#458588"),
+            purple: opt("#b16286"),
+            aqua: opt("#689d6a"),
+            gray: opt("#a89984"),
+            gray_dim: opt("#928374"),
+            red_dim: opt("#fb4934"),
+            green_dim: opt("#b8bb26"),
+            yellow_dim: opt("#fabd2f"),
+            blue_dim: opt("#83a598"),
+            purple_dim: opt("#d3869b"),
+            aqua_dim: opt("#8ec07c"),
             fg: opt("#ebdbb2"),
-            widget: opt("#504945"),
-            border: opt("#5a524c"),
+            bg0_h: opt("#1d2021"),
+            bg0: opt("#282828"),
+            bg1: opt("#3c3836"),
+            bg2: opt("#504945"),
+            bg3: opt("#665c54"),
+            bg4: opt("#7c6f64"),
+            orange: opt("#d65d0e"),
+            bg0_s: opt("#32302f"),
+            fg4: opt("#a89984"),
+            fg3: opt("#bdae93"),
+            fg2: opt("#d5c4a1"),
+            fg1: opt("#ebdbb2"),
+            fg0: opt("#fbf1c7"),
+            orange_dim: opt("#fe8019"),
         },
         light: {
-            primary: {
-                bg: opt("#426ede"),
-                fg: opt("#eeeeee"),
-            },
-            error: {
-                bg: opt("#b13558"),
-                fg: opt("#eeeeee"),
-            },
-            bg: opt("#fffffa"),
-            fg: opt("#080808"),
-            widget: opt("#080808"),
-            border: opt("#080808"),
+            bg: opt("#fbf1c7"),
+            red: opt("#cc241d"),
+            green: opt("#98971a"),
+            yellow: opt("#d79921"),
+            blue: opt("#458588"),
+            purple: opt("#b16286"),
+            aqua: opt("#689d6a"),
+            gray: opt("#7c6f64"),
+            gray_dim: opt("#928374"),  // Renamed to gray_dim
+            red_dim: opt("#9d0006"),   // Renamed to red_dim
+            green_dim: opt("#79740e"),  // Renamed to green_dim
+            yellow_dim: opt("#b57614"), // Renamed to yellow_dim
+            blue_dim: opt("#876678"),  // Renamed to blue_dim
+            purple_dim: opt("#bf3f71"), // Renamed to purple_dim
+            aqua_dim: opt("#427b58"),  // Renamed to aqua_dim
+            fg: opt("#3c3836"),
+            bg0_h: opt("#f9f5d7"),
+            bg0: opt("#fbf1c7"),
+            bg1: opt("#ebdbb2"),
+            bg2: opt("#d5c4a1"),
+            bg3: opt("#bdae93"),
+            bg4: opt("#a89984"),
+            orange: opt("#d65d0e"),
+            bg0_s: opt("#f2e5bc"),
+            fg4: opt("#7c6f64"),
+            fg3: opt("#665c54"),
+            fg2: opt("#504945"),
+            fg1: opt("#3c3836"),
+            fg0: opt("#282828"),
+            orange_dim: opt("#af3a03"),  // Renamed to orange_dim
         },
-        blur: opt(10),
+        primary: opt("blue"),
+        blur: opt(0),
         scheme: opt<"dark" | "light">("dark"),
         widget: { opacity: opt(94) },
         border: {
@@ -79,8 +116,8 @@ const options = mkOptions(OPTIONS, {
                 "bluetooth",
                 "battery",
                 "messages",
-                "date"
-            ])
+                "date",
+            ]),
         },
         launcher: {
             icon: {

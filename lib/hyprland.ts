@@ -9,12 +9,6 @@ const {
         border: { width },
         blur,
         shadows,
-        dark: {
-            primary: { bg: darkActive },
-        },
-        light: {
-            primary: { bg: lightActive },
-        },
         scheme,
     },
 } = options
@@ -26,20 +20,20 @@ const deps = [
     blur.id,
     width.id,
     shadows.id,
-    darkActive.id,
-    lightActive.id,
+    // darkActive.id,
+    // lightActive.id,
     scheme.id,
 ]
 
-function primary() {
-    return scheme.value === "dark"
-        ? darkActive.value
-        : lightActive.value
-}
+// function primary() {
+//     return scheme.value === "dark"
+//         ? darkActive.value
+//         : lightActive.value
+// }
 
-function rgba(color: string) {
-    return `rgba(${color}ff)`.replace("#", "")
-}
+// function rgba(color: string) {
+//     return `rgba(${color}ff)`.replace("#", "")
+// }
 
 function sendBatch(batch: string[]) {
     const cmd = batch
@@ -68,7 +62,7 @@ export async function setupHyprland() {
 
     if (blur.value > 0) {
         sendBatch(App.windows
-            .filter(w => w.name === "sideleft")
+            .filter(w => !w.name?.startsWith("bar"))
             .flatMap(({ name }) => [
                 `layerrule unset, ${name}`,
                 `layerrule blur, ${name}`,

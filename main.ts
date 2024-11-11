@@ -13,6 +13,7 @@ import Verification from "widget/powermenu/Verification"
 import PowerMenu from "widget/powermenu/PowerMenu"
 import SettingsDialog from "widget/settings/SettingsDialog"
 import Sideleft from "widget/sideleft/main"
+import Sideright from "widget/sideright/main"
 import { setupHyprland } from "lib/hyprland"
 
 App.config({
@@ -37,6 +38,7 @@ App.config({
         SettingsDialog(),
         Verification(),
         Sideleft(),
+        Sideright(),
     ],
 })
 

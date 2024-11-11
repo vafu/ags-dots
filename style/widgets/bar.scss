@@ -25,7 +25,6 @@ $button-radius: $radius;
     transition: $transition;
     background-color: $bg;
 
-
     .panel-button {
         @include panel-button;
 
@@ -79,8 +78,7 @@ $button-radius: $radius;
             }
 
             &.active {
-                // background-color: $primary-bg;
-                background-image: $active-gradient;
+                background-color: $primary-fg;
                 min-width: 15pt;
                 min-height: 12pt;
             }
@@ -93,14 +91,14 @@ $button-radius: $radius;
         &.active,
         &:active {
             label {
-                background-color: transparentize($primary-fg, .3);
+                background-color: transparentize($fg, .3);
 
                 &.occupied {
-                    background-color: transparentize($primary-fg, .15);
+                    background-color: transparentize($fg, .15);
                 }
 
                 &.active {
-                    background-color: $primary-fg;
+                    background-color: $fg;
                 }
             }
         }
@@ -129,7 +127,7 @@ $button-radius: $radius;
         }
 
         &:active image {
-            color: $primary-fg;
+            color: $fg;
         }
     }
 
@@ -140,7 +138,7 @@ $button-radius: $radius;
 
     .quicksettings:not(.active):not(:active) {
         .bluetooth {
-            color: $primary-bg;
+            color: $fg;
 
             label {
                 font-size: $font-size * .7;
@@ -180,10 +178,6 @@ $button-radius: $radius;
             }
         }
 
-        .regular image {
-            margin-left: $spacing * .5;
-        }
-
         trough {
             @include widget;
             min-height: 12pt;
@@ -219,24 +213,6 @@ $button-radius: $radius;
 
         }
 
-        @for $i from 1 through $bar-battery-blocks {
-            block:nth-child(#{$i}).filled {
-                background-color: color.mix($bg, $primary-bg, $i*3)
-            }
-
-            &.low block:nth-child(#{$i}).filled {
-                background-color: color.mix($bg, $error-bg, $i*3)
-            }
-
-            &.charging block:nth-child(#{$i}).filled {
-                background-color: color.mix($bg, $charging-bg, $i*3)
-            }
-
-            &:active .regular block:nth-child(#{$i}).filled {
-                background-color: color.mix($bg, $primary-fg, $i*3)
-            }
-        }
-
         &.low image {
             color: $error-bg
         }
@@ -257,7 +233,7 @@ $button-radius: $radius;
     .panel-button {
         &:hover>* {
             box-shadow: 1px 1px 3px 0 $shadow-color, inset 0 0 0 $border-width $border-color;
-            background-color: $bg;
+            background-color: $bg2;
         }
 
         &:not(:hover):not(.active) {

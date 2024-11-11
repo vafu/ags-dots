@@ -24,10 +24,16 @@ export type BarWidget = keyof typeof widget
 
 const SystemIndicators = () => PanelButton({
     window: "quicksettings",
-    on_clicked: () => App.toggleWindow("quicksettings"),
+    on_clicked: () => App.toggleWindow("sideright"),
     child: Widget.Box({
         children: indicators.bind().as(c => c.map(w => widget[w]())),
     }),
+    setup: self => {
+        App.connect("window-toggled", (_, name, isVisible) => {
+            if (name === "quicksettings")
+                self.toggleClassName("checked", isVisible)
+        })
+    },
 })
 
 const widget = {

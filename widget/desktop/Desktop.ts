@@ -12,7 +12,7 @@ export default (monitor: number) => Widget.Window({
     anchor: ["top", "bottom", "left", "right"],
     child: Widget.Box({
         expand: true,
-        css: options.theme.dark.primary.bg.bind().as(c => `
+        css: options.theme.primary.bind().as(c => `
             transition: 500ms;
             background-color: ${c}`),
         child: Widget.Box({

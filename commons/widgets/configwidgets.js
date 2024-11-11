@@ -67,6 +67,7 @@ export const ConfigToggle = ({
             },
         },
         child: widgetContent,
+        className: "wrapper-container",
         onClicked: self => self.attribute.toggle(self),
         setup: self => {
             setupCursorHover(self)
