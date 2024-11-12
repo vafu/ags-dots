@@ -77,7 +77,8 @@ export const TabContainer = ({ icons, names, children, className = "", setup = (
         vertical: true,
         className: `spacing-v-5 ${className}`,
         setup: self => {
-            self.pack_start(tabSection, false, false, 0)
+            // FIXME: This disables tabs
+            // self.pack_start(tabSection, false, false, 0)
             self.pack_end(contentStack, true, true, 0)
             setup(self)
         },
@@ -149,7 +150,8 @@ export const IconTabContainer = ({
         vertical: true,
         className: `spacing-v-5 ${className}`,
         setup: self => {
-            self.pack_start(tabSection, false, false, 0)
+            // FIXME: this disables tabs
+            // self.pack_start(tabSection, false, false, 0)
             self.pack_end(contentStack, true, true, 0)
             setup(self)
             self.hook(shownIndex, self => onChange(self, shownIndex.value))
