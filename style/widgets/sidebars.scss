@@ -1433,9 +1433,6 @@ $colorpicker_rounding: 0.341rem;
     background-color: $layer1;
 }
 
-.sidebar-chat-entry text selection {
-    background-color: $background;
-}
 
 .sidebar-chat-wrapper {
     transition: 400ms cubic-bezier(0.1, 1, 0, 1);
@@ -1478,6 +1475,7 @@ $colorpicker_rounding: 0.341rem;
 .sidebar-chat-messagearea {
     margin: 0.341rem;
 }
+
 
 .sidebar-chat-message {
     @include normal-rounding;
