@@ -505,7 +505,7 @@ widget {
 .txt-smaller {
     //10pt
     @include mainfont;
-    font-size: 0.85rem;
+    font-size: 0.9091rem;
 }
 
 .txt-tiny {
@@ -930,6 +930,7 @@ widget {
     min-width: 27.818rem;
     background-color: $background;
     padding: 1.023rem;
+    box-shadow: 1px 1px 3px 0 $shadow-color, inset 0 0 0 $border-width $border-color;
 }
 
 .sidebar-left {
@@ -940,6 +941,7 @@ widget {
     min-width: 50rem;
     background-color: $background;
     padding: 1.023rem;
+    box-shadow: 1px 1px 3px 0 $shadow-color, inset 0 0 0 $border-width $border-color;
 }
 
 .sidebar-group {

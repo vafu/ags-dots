@@ -19,7 +19,7 @@ separator {
 window.popup {
     >* {
         border: none;
-        box-shadow: none;
+        box-shadow: inset 0 0 $padding 0 $shadow-color;
     }
 
     menu {
