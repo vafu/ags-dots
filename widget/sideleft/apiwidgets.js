@@ -11,10 +11,11 @@ import Gemini from "service/gemini.js"
 import { geminiView, geminiCommands, sendMessage as geminiSendMessage, geminiTabIcon } from "./apis/gemini.js"
 import { enableClickthrough } from "commons/widgets/utils/clickthrough.js"
 import { checkKeybind } from "commons/widgets/utils/keybind.js"
-const TextView = Widget.subclass(Gtk.TextView, "AgsTextView")
+const TextView = Widget.subclass(Gtk.TextView, "Ags_TextView")
 
 import { widgetContent } from "./sideleft.js"
 import { IconTabContainer } from "commons/widgets/tabcontainer.js"
+import { MaterialIcon } from "commons/widgets/materialicon.js"
 
 const EXPAND_INPUT_THRESHOLD = 30
 const APILIST = {
@@ -58,7 +59,7 @@ export const chatEntry = TextView({
         .hook(Gemini, self => {
             if (APIS[currentApiId].name != "Assistant (Gemini Pro)")
                 return
-            self.placeholderText = (Gemini.key.length > 0 ? "Message Gemini" : "Enter Google API Key") 
+            self.placeholderText = (Gemini.key.length > 0 ? "Message Gemini" : "Enter Google API Key")
         }, "hasKey")
         .on("key-press-event", (widget, event) => {
             // Don't send when Shift+Enter
@@ -104,14 +105,13 @@ chatEntry.get_buffer().connect("changed", buffer => {
 const chatEntryWrapper = Scrollable({
     className: "sidebar-chat-wrapper",
     hscroll: "never",
-    vscroll: "always",
     child: chatEntry,
 })
 
 const chatSendButton = Button({
-    className: "txt-norm icon-material sidebar-chat-send",
+    className: "sidebar-chat-send",
     vpack: "end",
-    label: "arrow_upward",
+    child: MaterialIcon("send", "norm"),
     setup: setupCursorHover,
     onClicked: self => {
         APIS[currentApiId].sendCommand(chatEntry.get_buffer().text)
@@ -142,7 +142,7 @@ const textboxArea = Box({ // Entry area
             child: chatEntryWrapper,
             overlays: [chatPlaceholderRevealer],
         }),
-        Box({ className: "width-10" }),
+        // Box({ className: "width-10" }),
         chatSendButton,
     ],
 })

@@ -49,6 +49,14 @@ const centerWidgets = [
     },
 ]
 
+const battery = await Service.import("battery")
+
+function up(up) {
+    const h = Math.floor(up / 60)
+    const m = Math.floor(up % 60)
+    return `${h}h ${m < 10 ? "0" + m : m}m`
+}
+
 const timeRow = Box({
     className: "spacing-h-10 sidebar-group-invisible-morehorizpad",
     children: [
@@ -59,50 +67,10 @@ const timeRow = Box({
         Widget.Label({
             hpack: "center",
             className: "txt-small txt",
-            setup: self => {
-                const getUptime = async () => {
-                    try {
-                        await execAsync(["bash", "-c", "uptime -p"])
-                        return execAsync(["bash", "-c", "uptime -p | sed -e 's/...//;s/ day\\| days/d/;s/ hour\\| hours/h/;s/ minute\\| minutes/m/;s/,[^,]*//2'"])
-                    } catch {
-                        return execAsync(["bash", "-c", "uptime"]).then(output => {
-                            const uptimeRegex = /up\s+((\d+)\s+days?,\s+)?((\d+):(\d+)),/
-                            const matches = uptimeRegex.exec(output)
-
-                            if (matches) {
-                                const days = matches[2] ? parseInt(matches[2]) : 0
-                                const hours = matches[4] ? parseInt(matches[4]) : 0
-                                const minutes = matches[5] ? parseInt(matches[5]) : 0
-
-                                let formattedUptime = ""
-
-                                if (days > 0)
-                                    formattedUptime += `${days} d `
-
-                                if (hours > 0)
-                                    formattedUptime += `${hours} h `
-
-                                formattedUptime += `${minutes} m`
-
-                                return formattedUptime
-                            } else {
-                                throw new Error("Failed to parse uptime output")
-                            }
-                        })
-                    }
-                }
-
-                self.poll(5000, label => {
-                    getUptime().then(upTimeString => {
-                        label.label = `Uptime: ${upTimeString}`
-                    }).catch(err => {
-                        console.error(`Failed to fetch uptime: ${err}`)
-                    })
-                })
-            },
+            label: battery.bind("time_remaining").as(s => `Time remaining: ${up(s)}`),
         }),
         Widget.Box({ hexpand: true }),
-        ModuleReloadIcon({ hpack: "end" }),
+        // ModuleReloadIcon({ hpack: "end" }),
         // ModuleSettingsIcon({ hpack: 'end' }), // Button does work, gnome-control-center is kinda broken
         ModulePowerIcon({ hpack: "end" }),
     ],
@@ -161,7 +129,7 @@ export default () => Box({
                         sidebarOptionsStack,
                     ],
                 }),
-                // ModuleCalendar(),
+                ModuleCalendar(),
             ],
         }),
     ],

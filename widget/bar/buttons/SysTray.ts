@@ -11,6 +11,7 @@ const SysTrayItem = (item: TrayItem) => PanelButton({
     child: Widget.Icon({ icon: item.bind("icon") }),
     tooltip_markup: item.bind("tooltip_markup"),
     setup: self => {
+        console.log(item)
         const { menu } = item
         if (!menu)
             return

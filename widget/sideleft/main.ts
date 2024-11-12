@@ -5,7 +5,7 @@ export default () => PopupWindow({
     keymode: "on-demand",
     name: "sideleft",
     layout: "left",
-    transition: "slide_right",
+    transition: "crossfade",
     exclusivity: "normal",
     child: SidebarLeft(),
 })

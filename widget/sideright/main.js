@@ -6,7 +6,7 @@ export default () => PopupWindow({
     name: "sideright",
     anchor: ["top", "bottom", "right"],
     layout: "left",
-    transition: "slide_left",
+    transition: "crossfade",
     exclusivity: "normal",
     child: SidebarRight(),
 })

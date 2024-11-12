@@ -197,8 +197,6 @@ export const ModuleCalendar = () => Box({
             vertical: true,
             className: "sidebar-navrail spacing-v-10",
             children: [
-                StackButton("calendar", "calendar_month", "Calendar"),
-                StackButton("todo", "done_outline", "To Do"),
                 // StackButton(box, 'stars', 'star', 'GitHub'),
             ],
         }), false, false, 0)

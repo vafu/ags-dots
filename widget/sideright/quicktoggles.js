@@ -10,6 +10,7 @@ import { BluetoothIndicator, NetworkIndicator } from "commons/widgets/statusicon
 import { setupCursorHover } from "commons/widgets/utils/cursorhover.js"
 import { MaterialIcon } from "commons/widgets/materialicon.js"
 import { sidebarOptionsStack } from "./sideright.js"
+import options from "options.js"
 
 export const ToggleIconWifi = (props = {}) => Widget.Button({
     className: "txt-small sidebar-iconbutton",
@@ -260,13 +261,15 @@ export const ModuleSettingsIcon = (props = {}) => Widget.Button({
     },
 })
 
+const { sleep } = options.powermenu
+
 export const ModulePowerIcon = (props = {}) => Widget.Button({
     ...props,
     className: "txt-small sidebar-iconbutton",
     tooltipText: "Session",
     onClicked: () => {
-        closeEverything()
-        Utils.timeout(1, () => openWindowOnAllMonitors("session"))
+        App.closeWindow("sideright")
+        Utils.exec(sleep.value)
     },
     child: MaterialIcon("power_settings_new", "norm"),
     setup: button => {

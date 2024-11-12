@@ -3,19 +3,19 @@ $rootTransparency: 0.22; // Transparency = 1 - opacity
 $transparency: 0.75;
 
 // Transparent versions
-@if $transparent == True {
-  $background: transparentize($background, $rootTransparency);
-  $surface: transparentize($surface, $transparency);
-  $surfaceDim: transparentize($surfaceDim, $transparency);
-  $surfaceBright: transparentize($surfaceBright, $transparency);
-  $surfaceContainerLowest: transparentize($surfaceContainerLowest, $transparency);
-  $surfaceContainerLow: transparentize($surfaceContainerLow, $transparency);
-  $surfaceContainer: transparentize($surfaceContainer, $transparency);
-  $surfaceContainerHigh: transparentize($surfaceContainerHigh, $transparency);
-  $surfaceContainerHighest: transparentize($surfaceContainerHighest, $transparency);
-  $surfaceVariant: transparentize($surfaceVariant, $transparency);
-  $inverseSurface: transparentize($inverseSurface, $transparency);
-  $surfaceTint: transparentize($surfaceTint, $transparency);
+@if $transparent ==True {
+    $background: transparentize($background, $rootTransparency);
+    $surface: transparentize($surface, $transparency);
+    $surfaceDim: transparentize($surfaceDim, $transparency);
+    $surfaceBright: transparentize($surfaceBright, $transparency);
+    $surfaceContainerLowest: transparentize($surfaceContainerLowest, $transparency);
+    $surfaceContainerLow: transparentize($surfaceContainerLow, $transparency);
+    $surfaceContainer: transparentize($surfaceContainer, $transparency);
+    $surfaceContainerHigh: transparentize($surfaceContainerHigh, $transparency);
+    $surfaceContainerHighest: transparentize($surfaceContainerHighest, $transparency);
+    $surfaceVariant: transparentize($surfaceVariant, $transparency);
+    $inverseSurface: transparentize($inverseSurface, $transparency);
+    $surfaceTint: transparentize($surfaceTint, $transparency);
 }
 
 // Others
@@ -258,36 +258,6 @@ popover {
     min-height: 0.819rem;
 }
 
-.segment-container {
-    @include full-rounding;
-    border: 0.068rem solid $outline;
-}
-
-.segment-container>*:first-child {
-    border-top-left-radius: 9999px;
-    border-bottom-left-radius: 9999px;
-}
-
-.segment-container>* {
-    border-right: 0.068rem solid $outline;
-    padding: 0.341rem 0.682rem;
-}
-
-.segment-container>*:last-child {
-    border-right: 0rem solid transparent;
-    border-top-right-radius: 9999px;
-    border-bottom-right-radius: 9999px;
-}
-
-.segment-btn {
-    color: $onSurface;
-}
-
-.segment-btn:focus,
-.segment-btn:hover {
-    background-color: $layer0Hover;
-}
-
 .segment-btn-enabled {
     background-color: $secondaryContainer;
     color: $onSecondaryContainer;
@@ -298,8 +268,6 @@ popover {
     background-color: $secondaryContainer;
     color: $onSecondaryContainer;
 }
-
-.multipleselection-container {}
 
 .multipleselection-btn {
     @include small-rounding;
@@ -414,15 +382,18 @@ widget {
     @include small-rounding;
     background-color: $layer2;
     padding: 0.341rem;
+
     entry {
         color: $onLayer2;
         margin: 0.136rem 0.273rem;
     }
+
     button {
         margin-left: 0.205rem;
         padding: 0.136rem;
     }
 }
+
 .test {
     background-image: linear-gradient(45deg, #f4d609 0%, #f4d609 10%, #212121 10%, #212121 20%, #f4d609 20%, #f4d609 30%, #212121 30%,
             #212121 40%, #f4d609 40%, #f4d609 50%, #212121 50%, #212121 60%, #f4d609 60%,
@@ -516,25 +487,25 @@ widget {
 .txt-norm {
     //14pt
     @include mainfont;
-    font-size: 1.2727rem;
+    font-size: 1.2rem;
 }
 
 .txt-small {
     //12pt
     @include mainfont;
-    font-size: 1.0909rem;
+    font-size: 1rem;
 }
 
 .txt-smallie {
     //11pt
     @include mainfont;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .txt-smaller {
     //10pt
     @include mainfont;
-    font-size: 0.9091rem;
+    font-size: 0.85rem;
 }
 
 .txt-tiny {
@@ -832,13 +803,16 @@ widget {
         .margin-#{$dir}-#{$spacing} {
             margin-#{$dir}: 0.068rem * $spacing;
         }
+
         .padding-#{$dir}-#{$spacing} {
             padding-#{$dir}: 0.068rem * $spacing;
         }
     }
+
     .padding-#{$spacing} {
         padding: 0.068rem * $spacing;
     }
+
     .margin-#{$spacing} {
         padding: 0.068rem * $spacing;
     }
@@ -937,8 +911,15 @@ widget {
 .element-accel {
     @include element_accel;
 }
+
 @mixin group-padding {
     padding: 0.341rem;
+}
+
+.segment-container {
+    .segment-btn {
+        margin: 0.341rem;
+    }
 }
 
 .sidebar-right {
@@ -1441,8 +1422,16 @@ $colorpicker_rounding: 0.341rem;
 .sidebar-chat-entry {
     color: $onSurfaceVariant;
     caret-color: $onSurfaceVariant;
-    min-height: 1.773rem;
+    min-height: 10.773rem;
     min-width: 0rem;
+}
+
+.sidebar-chat-entry>text {
+    background-color: $layer1;
+}
+
+.sidebar-chat-entry text selection {
+    background-color: $background;
 }
 
 .sidebar-chat-wrapper {
@@ -1454,15 +1443,15 @@ $colorpicker_rounding: 0.341rem;
 }
 
 .sidebar-chat-send {
+    @include icon-material;
     @include element_decel;
-    min-width: 1.705rem;
-    min-height: 1.705rem;
     border-radius: $rounding_medium - 0.681rem;
+    margin: 0.5rem;
 }
 
 .sidebar-chat-send:hover,
 .sidebar-chat-send:focus {
-    background-color: $surfaceBright;
+    background-color: $background;
 }
 
 .sidebar-chat-send:active {
@@ -2029,7 +2018,7 @@ $waifu_image_overlay_transparency: 0.7;
     border: 0.034rem solid $outlineVariant;
     color: $onLayer2;
     padding: $rounding_small;
-    padding-right: $rounding_small + 0.545rem;
+    padding-right: $rounding_small +0.545rem;
 }
 
 .popup-notif-normal {
@@ -2044,7 +2033,7 @@ $waifu_image_overlay_transparency: 0.7;
     border: 0.034rem solid $outlineVariant;
     color: $onLayer2;
     padding: $rounding_small;
-    padding-right: $rounding_small + 0.545rem;
+    padding-right: $rounding_small +0.545rem;
 }
 
 .popup-notif-critical {
