@@ -8,7 +8,7 @@ window.indicator {
         .fill {
             border-radius: $radius;
             background-color: $primary-bg;
-            color: $primary-fg;
+            color: $fg;
 
             image {
                 -gtk-icon-transform: scale(0.7);

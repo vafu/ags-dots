@@ -926,17 +926,18 @@ widget {
     @include menu_decel;
     @include elevation-border;
     @include elevation2;
+    @include floating-widget;
     border-radius: $rounding_large - $elevation_margin + 0.068rem;
     min-width: 27.818rem;
     background-color: $background;
     padding: 1.023rem;
-    box-shadow: 1px 1px 3px 0 $shadow-color, inset 0 0 0 $border-width $border-color;
 }
 
 .sidebar-left {
     @include menu_decel;
     @include elevation-border;
     @include elevation2;
+    @include floating-widget;
     border-radius: $rounding_large - $elevation_margin + 0.068rem;
     min-width: 50rem;
     background-color: $background;
