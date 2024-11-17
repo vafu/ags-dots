@@ -20,6 +20,7 @@
     "dependencies": {
         "@girs/ags-6.0": "^6.0.0-4.0.0-beta.16",
         "@girs/gjs": "^4.0.0-beta.16",
+        "@girs/glib-2.0": "^2.82.2-4.0.0-beta.19",
         "@girs/gnome-shell": "^46.0.2",
         "@girs/gtk-4.0": "^4.15.5-4.0.0-beta.16",
         "ags-ts": "^1.0.6",

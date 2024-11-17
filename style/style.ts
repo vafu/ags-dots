@@ -2,7 +2,7 @@
 import { type Opt } from "lib/option"
 import options from "options"
 import { bash, dependencies } from "lib/utils"
-import GLib from "types/@girs/glib-2.0/glib-2.0"
+import GLib from "node_modules/@girs/glib-2.0/glib-2.0"
 
 const gtkcss_path = `${GLib.get_user_config_dir()}/gtk-3.0/gtk.css`
 const gtkcss = Utils.readFile(gtkcss_path)
